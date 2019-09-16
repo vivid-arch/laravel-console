@@ -1,0 +1,26 @@
+{
+    "name": "vivid-arch/laravel-console",
+    "description": "The Command Line Interface for the Vivid Architecture",
+    "keywords": ["laravel", "vivid", "mvc", "ddd", "domains", "architecture"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Meletios Flevarakis",
+            "email": "m.flevarakis@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Vivid\\Console\\": "src/"
+        }
+    },
+    "bin": ["vivid"],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/console": "^4.1",
+        "symfony/process": "^4.1",
+        "symfony/finder": "^4.1",
+        "symfony/filesystem": "^4.1",
+        "phploc/phploc": "~4.0"
+    }
+}

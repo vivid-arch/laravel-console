@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists('./vendor/autoload.php')) {
+    require './vendor/autoload.php';
+} else if(file_exists(__DIR__.'/vendor/autoload.php')) {
+    require __DIR__.'/vendor/autoload.php';
+} else {
+    require __DIR__.'/../../../bootstrap/autoload.php';
+}
+
+if (file_exists('./bootstrap/app.php')) {
+    $laravel = require'./bootstrap/app.php';
+} else {
+    $laravel = require __DIR__.'/../../../bootstrap/app.php';
+}
+
+$commands = [
+    new Vivid\Console\Commands\JobMakeCommand(),
+    new Vivid\Console\Commands\DeviceMakeCommand(),
+    new Vivid\Console\Commands\FeatureMakeCommand(),
+    new Vivid\Console\Commands\ControllerMakeCommand(),
+    new Vivid\Console\Commands\DeviceListCommand(),
+    new Vivid\Console\Commands\FeaturesListCommand(),
+    new Vivid\Console\Commands\RequestMakeCommand(),
+    new Vivid\Console\Commands\OperationMakeCommand()
+];
+
+$app = new Symfony\Component\Console\Application('Vivid Console', '0.1.0');
+array_walk($commands, [$app, 'add']);
+
+$app->run();
