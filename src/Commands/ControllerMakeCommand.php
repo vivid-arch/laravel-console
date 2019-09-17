@@ -87,7 +87,7 @@ class ControllerMakeCommand extends SymfonyCommand
     {
         return [
             ['controller', InputArgument::REQUIRED, 'The controller\'s name.'],
-            ['device', InputArgument::OPTIONAL, 'The device in which the controller should be generated.'],
+            ['device', InputArgument::REQUIRED, 'The device in which the controller should be generated.'],
         ];
     }
 
