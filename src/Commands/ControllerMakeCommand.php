@@ -12,13 +12,13 @@
 
 namespace Vivid\Console\Commands;
 
-use Vivid\Console\Finder;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
-use Symfony\Component\Console\Input\InputOption;
+use Vivid\Console\Finder;
 use Vivid\Console\Generators\ControllerGenerator;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Vivid\Console\Str;
 
 /**
@@ -55,8 +55,9 @@ class ControllerMakeCommand extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @return void
      * @throws \Exception
+     *
+     * @return void
      */
     public function handle()
     {

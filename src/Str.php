@@ -20,7 +20,6 @@ use Illuminate\Support\Str as LaravelStr;
  */
 class Str extends LaravelStr
 {
-
     /**
      * Determine the real name of the given name,
      * excluding the given pattern.
@@ -143,22 +142,23 @@ class Str extends LaravelStr
      * Get the given name formatted as a policy.
      *
      * @param $name
+     *
      * @return string
      */
     public static function policy($name)
     {
-        return static::studly(preg_replace('/Policy(\.php)?$/', '', $name) . 'Policy');
+        return static::studly(preg_replace('/Policy(\.php)?$/', '', $name).'Policy');
     }
 
     /**
      * Get the given name formatted as a request.
      *
      * @param $name
+     *
      * @return string
      */
     public static function request($name)
     {
-        return static::studly(preg_replace('/Request(\.php)?$/', '', $name) . 'Request');
+        return static::studly(preg_replace('/Request(\.php)?$/', '', $name).'Request');
     }
-
 }

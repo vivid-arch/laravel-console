@@ -21,7 +21,6 @@ use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
  */
 trait Filesystem
 {
-
     /**
      * Determine if a file or directory exists.
      *
@@ -81,5 +80,4 @@ trait Filesystem
 
         $filesystem->remove($path);
     }
-
 }

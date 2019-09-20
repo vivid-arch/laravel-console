@@ -13,13 +13,12 @@
 namespace Vivid\Console\Commands;
 
 use Exception;
-use Vivid\Console\Generators\RequestGenerator;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Input\InputArgument;
-
+use Vivid\Console\Generators\RequestGenerator;
 
 /**
  * @author Bernat Jufré <info@behind.design>
@@ -46,7 +45,8 @@ class RequestMakeCommand extends SymfonyCommand
     protected $description = 'Create a Request in a specific service.';
 
     /**
-     * The type of class being generated
+     * The type of class being generated.
+     *
      * @var string
      */
     protected $type = 'Request';
@@ -66,10 +66,10 @@ class RequestMakeCommand extends SymfonyCommand
         try {
             $request = $generator->generate($name, $device);
 
-            $this->info('Request class created successfully.' .
-                "\n" .
-                "\n" .
-                'Find it at <comment>' . $request->relativePath . '</comment>' . "\n"
+            $this->info('Request class created successfully.'.
+                "\n".
+                "\n".
+                'Find it at <comment>'.$request->relativePath.'</comment>'."\n"
             );
         } catch (Exception $e) {
             $this->error($e->getMessage());
@@ -96,6 +96,6 @@ class RequestMakeCommand extends SymfonyCommand
      */
     public function getStub()
     {
-        return __DIR__ . '/../Generators/stubs/request.stub';
+        return __DIR__.'/../Generators/stubs/request.stub';
     }
 }

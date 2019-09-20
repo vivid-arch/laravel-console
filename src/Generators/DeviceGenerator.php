@@ -47,7 +47,6 @@ class DeviceGenerator extends Generator
         'Tests/Features/',
     ];
 
-
     public function generate($name)
     {
         $name = Str::device($name);
@@ -84,7 +83,7 @@ class DeviceGenerator extends Generator
     /**
      * Create the default directories at the given device path.
      *
-     * @param  string $path
+     * @param string $path
      *
      * @return void
      */
@@ -103,8 +102,9 @@ class DeviceGenerator extends Generator
      * @param string $slug
      * @param string $path
      *
-     * @return void
      * @throws Exception
+     *
+     * @return void
      */
     public function addDeviceProviders(string $name, string $slug, string $path)
     {
@@ -118,8 +118,8 @@ class DeviceGenerator extends Generator
     /**
      * Create the service provider that registers this device.
      *
-     * @param  string $name
-     * @param  string $path
+     * @param string $name
+     * @param string $path
      */
     public function createRegistrationServiceProvider($name, $path, $slug, $namespace)
     {
@@ -136,10 +136,11 @@ class DeviceGenerator extends Generator
     /**
      * Create the routes service provider file.
      *
-     * @param  string $name
-     * @param  string $path
-     * @param  string $slug
-     * @param  string $namespace
+     * @param string $name
+     * @param string $path
+     * @param string $slug
+     * @param string $namespace
+     *
      * @throws Exception
      */
     public function createRouteServiceProvider(string $name, string $path, string $slug, string $namespace)
@@ -158,7 +159,7 @@ class DeviceGenerator extends Generator
         $this->createFile($path.'/Providers/RouteServiceProvider.php', $content);
     }
 
-     /**
+    /**
      * Add the routes files.
      *
      * @param string $name
@@ -167,16 +168,16 @@ class DeviceGenerator extends Generator
      */
     public function addRoutesFiles($name, $slug, $path)
     {
-        $controllers = 'src/Devices/' . $name . '/Http/Controllers';
+        $controllers = 'src/Devices/'.$name.'/Http/Controllers';
 
-        $contentApi = file_get_contents(__DIR__ . '/stubs/routes-api.stub');
+        $contentApi = file_get_contents(__DIR__.'/stubs/routes-api.stub');
         $contentApi = str_replace(['{{slug}}', '{{controllers_path}}'], [$slug, $controllers], $contentApi);
 
-        $contentWeb = file_get_contents(__DIR__ . '/stubs/routes-web.stub');
+        $contentWeb = file_get_contents(__DIR__.'/stubs/routes-web.stub');
         $contentWeb = str_replace(['{{slug}}', '{{controllers_path}}'], [$slug, $controllers], $contentWeb);
 
-        $this->createFile($path . '/routes/api.php', $contentApi);
-        $this->createFile($path . '/routes/web.php', $contentWeb);
+        $this->createFile($path.'/routes/api.php', $contentApi);
+        $this->createFile($path.'/routes/web.php', $contentWeb);
 
         unset($contentApi, $contentWeb);
     }
@@ -211,8 +212,8 @@ class DeviceGenerator extends Generator
      */
     public function addModelFactory($path)
     {
-        $modelFactory = file_get_contents(__DIR__ . '/stubs/model-factory.stub');
-        $this->createFile($path . '/database/factories/ModelFactory.php', $modelFactory);
+        $modelFactory = file_get_contents(__DIR__.'/stubs/model-factory.stub');
+        $this->createFile($path.'/database/factories/ModelFactory.php', $modelFactory);
 
         unset($modelFactory);
     }

@@ -13,8 +13,8 @@
 namespace Vivid\Console\Generators;
 
 use Exception;
-use Vivid\Console\Str;
 use Vivid\Console\Components\Feature;
+use Vivid\Console\Str;
 
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
@@ -22,12 +22,13 @@ use Vivid\Console\Components\Feature;
  */
 class FeatureGenerator extends Generator
 {
-
     /**
      * @param string $feature
      * @param $device
-     * @return Feature
+     *
      * @throws Exception
+     *
+     * @return Feature
      */
     public function generate(string $feature, $device)
     {
@@ -68,27 +69,28 @@ class FeatureGenerator extends Generator
     /**
      * Generate the test file.
      *
-     * @param  string $feature
-     * @param  string $service
+     * @param string $feature
+     * @param string $service
+     *
      * @throws Exception
      */
     private function generateTestFile(string $feature, string $service)
     {
-    	$content = file_get_contents($this->getTestStub());
+        $content = file_get_contents($this->getTestStub());
 
-    	$namespace = $this->findFeatureTestNamespace($service);
+        $namespace = $this->findFeatureTestNamespace($service);
         $featureNamespace = $this->findFeatureNamespace($service)."\\$feature";
         $testClass = $feature.'Test';
 
-    	$content = str_replace(
-    		['{{namespace}}', '{{testclass}}', '{{feature}}', '{{feature_namespace}}'],
-    		[$namespace, $testClass, mb_strtolower($feature), $featureNamespace],
-    		$content
-    	);
+        $content = str_replace(
+            ['{{namespace}}', '{{testclass}}', '{{feature}}', '{{feature_namespace}}'],
+            [$namespace, $testClass, mb_strtolower($feature), $featureNamespace],
+            $content
+        );
 
-    	$path = $this->findFeatureTestPath($service, $testClass);
+        $path = $this->findFeatureTestPath($service, $testClass);
 
-    	$this->createFile($path, $content);
+        $this->createFile($path, $content);
     }
 
     /**
@@ -108,6 +110,6 @@ class FeatureGenerator extends Generator
      */
     private function getTestStub()
     {
-    	return __DIR__.'/stubs/feature-test.stub';
+        return __DIR__.'/stubs/feature-test.stub';
     }
 }

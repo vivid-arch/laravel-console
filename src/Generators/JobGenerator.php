@@ -13,8 +13,8 @@
 namespace Vivid\Console\Generators;
 
 use Exception;
-use Vivid\Console\Str;
 use Vivid\Console\Components\Job;
+use Vivid\Console\Str;
 
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
@@ -22,13 +22,14 @@ use Vivid\Console\Components\Job;
  */
 class JobGenerator extends Generator
 {
-
     /**
      * @param string $job
      * @param string $domain
-     * @param bool $isQueueable
-     * @return Job
+     * @param bool   $isQueueable
+     *
      * @throws Exception
+     *
+     * @return Job
      */
     public function generate(string $job, string $domain, bool $isQueueable = false)
     {
@@ -73,6 +74,7 @@ class JobGenerator extends Generator
      *
      * @param string $job
      * @param string $domain
+     *
      * @throws Exception
      */
     private function generateTestFile($job, $domain)
@@ -109,6 +111,7 @@ class JobGenerator extends Generator
      * Get the stub file for the generator.
      *
      * @param bool $isQueueable
+     *
      * @return string
      */
     public function getStub(bool $isQueueable = false)
@@ -118,6 +121,7 @@ class JobGenerator extends Generator
         } else {
             $stubName = '/stubs/job.stub';
         }
+
         return __DIR__.$stubName;
     }
 

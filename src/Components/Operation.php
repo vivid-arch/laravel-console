@@ -18,15 +18,15 @@ namespace Vivid\Console\Components;
  */
 class Operation extends Component
 {
-
     /**
      * Operation constructor.
+     *
      * @param $title
      * @param $file
      * @param $realPath
      * @param $relativePath
      * @param Device|null $service
-     * @param string $content
+     * @param string      $content
      */
     public function __construct(
         string $title,
@@ -39,13 +39,13 @@ class Operation extends Component
         $className = str_replace(' ', '', $title).'Operation';
 
         $this->setAttributes([
-            'title' => $title,
-            'className' => $className,
-            'service' => $service,
-            'file' => $file,
-            'realPath' => $realPath,
+            'title'        => $title,
+            'className'    => $className,
+            'service'      => $service,
+            'file'         => $file,
+            'realPath'     => $realPath,
             'relativePath' => $relativePath,
-            'content' => $content,
+            'content'      => $content,
         ]);
     }
 }

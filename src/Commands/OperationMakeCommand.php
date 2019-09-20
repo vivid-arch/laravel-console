@@ -12,14 +12,14 @@
 
 namespace Vivid\Console\Commands;
 
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
 use Vivid\Console\Generators\OperationGenerator;
 use Vivid\Console\Str;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * @author Ali Issa <ali@vinelab.com>
@@ -55,8 +55,9 @@ class OperationMakeCommand extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @return void
      * @throws \Exception
+     *
+     * @return void
      */
     public function handle()
     {
@@ -65,6 +66,7 @@ class OperationMakeCommand extends SymfonyCommand
         $device = Str::studly($this->argument('device'));
         $title = $this->parseName($this->argument('operation'));
         $isQueueable = $this->option('queue');
+
         try {
             $operation = $generator->generate($title, $device, $isQueueable);
 

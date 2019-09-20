@@ -12,10 +12,10 @@
 
 namespace Vivid\Console\Commands;
 
-use Vivid\Console\Finder;
-use Vivid\Console\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Vivid\Console\Command;
+use Vivid\Console\Finder;
 
 /**
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
@@ -42,14 +42,15 @@ class FeaturesListCommand extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @return void
      * @throws \Exception
+     *
+     * @return void
      */
     public function handle()
     {
         foreach ($this->listFeatures($this->argument('device')) as $device => $features) {
             $this->comment("\n$device\n");
-            $features = array_map(function($feature) {
+            $features = array_map(function ($feature) {
                 return [$feature->title, $feature->service->name, $feature->file, $feature->realPath];
             }, $features->all());
             $this->table(['Feature', 'Device', 'File', 'Path'], $features);

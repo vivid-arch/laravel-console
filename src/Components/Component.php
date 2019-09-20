@@ -41,7 +41,7 @@ class Component implements Arrayable
     /**
      * Get an attribute's value if found.
      *
-     * @param  string $key
+     * @param string $key
      *
      * @return mixed
      */
@@ -51,5 +51,4 @@ class Component implements Arrayable
             return $this->attributes[$key];
         }
     }
-
 }

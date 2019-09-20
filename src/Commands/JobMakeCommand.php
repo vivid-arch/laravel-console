@@ -12,14 +12,14 @@
 
 namespace Vivid\Console\Commands;
 
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
 use Vivid\Console\Generators\JobGenerator;
 use Vivid\Console\Str;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
@@ -55,8 +55,9 @@ class JobMakeCommand extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @return void
      * @throws \Exception
+     *
+     * @return void
      */
     public function handle()
     {
@@ -65,6 +66,7 @@ class JobMakeCommand extends SymfonyCommand
         $domain = Str::studly($this->argument('domain'));
         $title = $this->parseName($this->argument('job'));
         $isQueueable = $this->option('queue');
+
         try {
             $job = $generator->generate($title, $domain, $isQueueable);
 

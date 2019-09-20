@@ -20,9 +20,9 @@ use Illuminate\Support\Str;
  */
 class Domain extends Component
 {
-
     /**
      * Domain constructor.
+     *
      * @param string $name
      * @param string $namespace
      * @param string $path
@@ -35,12 +35,11 @@ class Domain extends Component
         string $relativePath
     ) {
         $this->setAttributes([
-            'name' => $name,
-            'slug' => Str::studly($name),
-            'namespace' => $namespace,
-            'realPath' => $path,
+            'name'         => $name,
+            'slug'         => Str::studly($name),
+            'namespace'    => $namespace,
+            'realPath'     => $path,
             'relativePath' => $relativePath,
         ]);
     }
-
 }

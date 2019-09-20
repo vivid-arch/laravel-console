@@ -18,9 +18,9 @@ namespace Vivid\Console\Components;
  */
 class Request extends Component
 {
-
     /**
      * Request constructor.
+     *
      * @param string $title
      * @param string $service
      * @param string $namespace
@@ -39,14 +39,13 @@ class Request extends Component
         string $content
     ) {
         $this->setAttributes([
-            'request' => $title,
-            'service' => $service,
-            'namespace' => $namespace,
-            'file' => $file,
-            'path' => $path,
+            'request'      => $title,
+            'service'      => $service,
+            'namespace'    => $namespace,
+            'file'         => $file,
+            'path'         => $path,
             'relativePath' => $relativePath,
-            'content' => $content,
+            'content'      => $content,
         ]);
     }
-
 }

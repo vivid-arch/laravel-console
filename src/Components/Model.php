@@ -18,9 +18,9 @@ namespace Vivid\Console\Components;
  */
 class Model extends Component
 {
-
     /**
      * Model constructor.
+     *
      * @param string $title
      * @param string $namespace
      * @param string $file
@@ -37,13 +37,12 @@ class Model extends Component
         string $content
     ) {
         $this->setAttributes([
-            'model' => $title,
-            'namespace' => $namespace,
-            'file' => $file,
-            'path' => $path,
+            'model'        => $title,
+            'namespace'    => $namespace,
+            'file'         => $file,
+            'path'         => $path,
             'relativePath' => $relativePath,
-            'content' => $content,
+            'content'      => $content,
         ]);
     }
-
 }

@@ -31,7 +31,7 @@ class Analyser
         $analyser = new PHPLOCAnalyser();
 
         $finder = new FinderFacade([$this->findSourceRoot()]);
-        $files  = $finder->findFiles();
+        $files = $finder->findFiles();
 
         return $analyser->countFiles($files, true);
     }

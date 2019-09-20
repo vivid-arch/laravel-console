@@ -20,13 +20,12 @@ use Illuminate\Support\ServiceProvider;
  */
 class LucidServiceProvider extends ServiceProvider
 {
-
     /**
      * Perform post-registration booting of services.
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/../config/lucid.php';
+        $configPath = __DIR__.'/../config/lucid.php';
         $this->publishes([$configPath => $this->getConfigPath()], 'config');
 
         $dashboardEnabled = $this->app['config']->get('lucid.dashboard');
@@ -36,7 +35,7 @@ class LucidServiceProvider extends ServiceProvider
         }
 
         if ($dashboardEnabled === true) {
-            if (!$this->app->routesAreCached() ) {
+            if (!$this->app->routesAreCached()) {
                 require_once __DIR__.'/Http/routes.php';
             }
         }
@@ -53,7 +52,7 @@ class LucidServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $configPath = __DIR__ . '/../config/lucid.php';
+        $configPath = __DIR__.'/../config/lucid.php';
         $this->mergeConfigFrom($configPath, 'lucid');
 
         //$this->app->register(LogReaderServiceProvider::class);
@@ -68,5 +67,4 @@ class LucidServiceProvider extends ServiceProvider
     {
         return config_path('lucid.php');
     }
-
 }

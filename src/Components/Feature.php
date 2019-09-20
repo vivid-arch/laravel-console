@@ -18,15 +18,15 @@ namespace Vivid\Console\Components;
  */
 class Feature extends Component
 {
-
     /**
      * Feature constructor.
-     * @param string $title
-     * @param string $file
-     * @param string $realPath
-     * @param string $relativePath
+     *
+     * @param string      $title
+     * @param string      $file
+     * @param string      $realPath
+     * @param string      $relativePath
      * @param Device|null $service
-     * @param string $content
+     * @param string      $content
      */
     public function __construct(
         string $title,
@@ -39,14 +39,13 @@ class Feature extends Component
         $className = str_replace(' ', '', $title).'Feature';
 
         $this->setAttributes([
-            'title' => $title,
-            'className' => $className,
-            'service' => $service,
-            'file' => $file,
-            'realPath' => $realPath,
+            'title'        => $title,
+            'className'    => $className,
+            'service'      => $service,
+            'file'         => $file,
+            'realPath'     => $realPath,
             'relativePath' => $relativePath,
-            'content' => $content,
+            'content'      => $content,
         ]);
     }
-
 }
