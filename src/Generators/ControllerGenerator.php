@@ -21,13 +21,14 @@ use Vivid\Console\Str;
  */
 class ControllerGenerator extends Generator
 {
-
     /**
      * @param string $name
      * @param string $device
-     * @param bool $plain
-     * @return string
+     * @param bool   $plain
+     *
      * @throws Exception
+     *
+     * @return string
      */
     public function generate(string $name, string $device, bool $plain = false)
     {
@@ -58,6 +59,7 @@ class ControllerGenerator extends Generator
      * Get the stub file for the generator.
      *
      * @param string $resource
+     *
      * @return string
      */
     protected function getStub(string $resource)

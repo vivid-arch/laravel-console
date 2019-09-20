@@ -12,9 +12,9 @@
 
 namespace Vivid\Console\Commands;
 
-use Vivid\Console\Finder;
-use Vivid\Console\Command;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Vivid\Console\Command;
+use Vivid\Console\Finder;
 
 /**
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
@@ -42,7 +42,7 @@ class DeviceListCommand extends SymfonyCommand
     {
         $devices = $this->listDevices()->all();
 
-        $this->table(['Device', 'Slug', 'Path'], array_map(function($device) {
+        $this->table(['Device', 'Slug', 'Path'], array_map(function ($device) {
             return [$device->name, $device->slug, $device->realPath];
         }, $devices));
     }

@@ -21,7 +21,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 trait Command
 {
-
     /**
      * Configure the command options.
      *
@@ -65,8 +64,9 @@ trait Command
     /**
      * Execute the command.
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
+     *
      * @return int
      */
     public function execute(InputInterface $input, OutputInterface $output)
@@ -114,7 +114,8 @@ trait Command
     /**
      * Write a string as comment output.
      *
-     * @param  string  $string
+     * @param string $string
+     *
      * @return void
      */
     public function comment($string)
@@ -125,7 +126,8 @@ trait Command
     /**
      * Write a string as error output.
      *
-     * @param  string  $string
+     * @param string $string
+     *
      * @return void
      */
     public function error($string)
@@ -136,9 +138,10 @@ trait Command
     /**
      * Format input to textual table.
      *
-     * @param  array   $headers
-     * @param  \Illuminate\Contracts\Support\Arrayable|array  $rows
-     * @param  string  $style
+     * @param array                                         $headers
+     * @param \Illuminate\Contracts\Support\Arrayable|array $rows
+     * @param string                                        $style
+     *
      * @return void
      */
     public function table(array $headers, $rows, $style = 'default')
@@ -196,5 +199,4 @@ trait Command
 
         return $this->getHelperSet()->get('dialog')->askHiddenResponse($this->output, $question, false);
     }
-
 }

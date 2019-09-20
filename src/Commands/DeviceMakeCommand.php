@@ -12,12 +12,12 @@
 
 namespace Vivid\Console\Commands;
 
-use Vivid\Console\Finder;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
+use Vivid\Console\Finder;
 use Vivid\Console\Generators\DeviceGenerator;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
 
 /**
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>

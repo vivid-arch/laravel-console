@@ -13,8 +13,8 @@
 namespace Vivid\Console\Generators;
 
 use Exception;
-use Vivid\Console\Str;
 use Vivid\Console\Components\Operation;
+use Vivid\Console\Str;
 
 /**
  * @author Ali Issa <ali@vinelab.com>
@@ -22,14 +22,15 @@ use Vivid\Console\Components\Operation;
  */
 class OperationGenerator extends Generator
 {
-
     /**
      * @param string $operation
      * @param string $device
-     * @param bool $isQueueable
-     * @param array $jobs
-     * @return Operation
+     * @param bool   $isQueueable
+     * @param array  $jobs
+     *
      * @throws Exception
+     *
+     * @return Operation
      */
     public function generate(string $operation, string $device, bool $isQueueable = false, array $jobs = [])
     {
@@ -85,6 +86,7 @@ class OperationGenerator extends Generator
      *
      * @param string $operation
      * @param string $device
+     *
      * @throws Exception
      */
     private function generateTestFile(string $operation, string $device)
@@ -110,6 +112,7 @@ class OperationGenerator extends Generator
      * Get the stub file for the generator.
      *
      * @param bool $isQueueable
+     *
      * @return string
      */
     protected function getStub(bool $isQueueable = false)
@@ -119,6 +122,7 @@ class OperationGenerator extends Generator
         } else {
             $stubName = '/stubs/operation.stub';
         }
+
         return __DIR__.$stubName;
     }
 

@@ -13,9 +13,8 @@
 namespace Vivid\Console\Generators;
 
 use Exception;
-use Vivid\Console\Str;
 use Vivid\Console\Components\Request;
-
+use Vivid\Console\Str;
 
 /**
  * @author Bernat Jufré <info@behind.design>
@@ -23,14 +22,15 @@ use Vivid\Console\Components\Request;
  */
 class RequestGenerator extends Generator
 {
-
     /**
      * Generate the file.
      *
      * @param string $name
      * @param string $service
-     * @return Request|bool
+     *
      * @throws Exception
+     *
+     * @return Request|bool
      */
     public function generate($name, $service)
     {
@@ -71,7 +71,6 @@ class RequestGenerator extends Generator
      */
     public function getStub()
     {
-        return __DIR__ . '/../Generators/stubs/request.stub';
+        return __DIR__.'/../Generators/stubs/request.stub';
     }
-
 }

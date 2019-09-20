@@ -18,16 +18,16 @@ namespace Vivid\Console\Components;
  */
 class Job extends Component
 {
-
     /**
      * Job constructor.
-     * @param string $title
-     * @param string $namespace
-     * @param string $file
-     * @param string $path
-     * @param string $relativePath
+     *
+     * @param string      $title
+     * @param string      $namespace
+     * @param string      $file
+     * @param string      $path
+     * @param string      $relativePath
      * @param Domain|null $domain
-     * @param string $content
+     * @param string      $content
      */
     public function __construct(
         string $title,
@@ -40,14 +40,14 @@ class Job extends Component
     ) {
         $className = str_replace(' ', '', $title).'Job';
         $this->setAttributes([
-            'title' => $title,
-            'className' => $className,
-            'namespace' => $namespace,
-            'file' => $file,
-            'realPath' => $path,
+            'title'        => $title,
+            'className'    => $className,
+            'namespace'    => $namespace,
+            'file'         => $file,
+            'realPath'     => $path,
             'relativePath' => $relativePath,
-            'domain' => $domain,
-            'content' => $content,
+            'domain'       => $domain,
+            'content'      => $content,
         ]);
     }
 

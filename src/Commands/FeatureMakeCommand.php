@@ -12,13 +12,13 @@
 
 namespace Vivid\Console\Commands;
 
-use Vivid\Console\Str;
-use Vivid\Console\Finder;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
+use Vivid\Console\Finder;
 use Vivid\Console\Generators\FeatureGenerator;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Command\Command as SymfonyCommand;
+use Vivid\Console\Str;
 
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
@@ -54,8 +54,9 @@ class FeatureMakeCommand extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @return void
      * @throws \Exception
+     *
+     * @return void
      */
     public function handle()
     {

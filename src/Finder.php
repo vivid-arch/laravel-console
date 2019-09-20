@@ -13,13 +13,13 @@
 namespace Vivid\Console;
 
 use Exception;
-use InvalidArgumentException;
 use Illuminate\Support\Collection;
-use Vivid\Console\Components\Feature;
+use InvalidArgumentException;
+use Symfony\Component\Finder\Finder as SymfonyFinder;
 use Vivid\Console\Components\Device;
 use Vivid\Console\Components\Domain;
+use Vivid\Console\Components\Feature;
 use Vivid\Console\Components\Job;
-use Symfony\Component\Finder\Finder as SymfonyFinder;
 
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -29,7 +29,6 @@ define('DS', DIRECTORY_SEPARATOR);
  */
 trait Finder
 {
-
     /**
      * The name of the source directory.
      *
@@ -47,7 +46,7 @@ trait Finder
             ->files();
 
         $matches = [
-            'jobs' => [],
+            'jobs'     => [],
             'features' => [],
         ];
 
@@ -94,20 +93,20 @@ trait Finder
         });
     }
 
-     /**
-      * Map the fuzzy-find results into the data
-      * that should be returned.
-      *
-      * @param  array $results
-      *
-      * @return array
-      */
-     private function mapFuzzyResults($results)
-     {
-         return array_map(function ($result) {
+    /**
+     * Map the fuzzy-find results into the data
+     * that should be returned.
+     *
+     * @param  array $results
+     *
+     * @return array
+     */
+    private function mapFuzzyResults($results)
+    {
+        return array_map(function ($result) {
             return $result[0];
         }, $results);
-     }
+    }
 
     /**
      * Get the source directory name.
@@ -137,9 +136,9 @@ trait Finder
     /**
      * Get the namespace used for the application.
      *
-     * @return string
-     *
      * @throws \Exception
+     *
+     * @return string
      */
     public function findRootNamespace()
     {
@@ -171,8 +170,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findDeviceNamespace($device)
     {
@@ -259,8 +259,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findFeatureNamespace($device)
     {
@@ -272,8 +273,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findFeatureTestNamespace($device)
     {
@@ -310,6 +312,7 @@ trait Finder
      *
      * @param string $device
      * @param $test
+     *
      * @return string
      */
     public function findOperationTestPath($device, $test)
@@ -324,8 +327,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findOperationNamespace($device)
     {
@@ -337,8 +341,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findOperationTestNamespace($device)
     {
@@ -403,8 +408,9 @@ trait Finder
      *
      * @param string $domainName
      *
-     * @return Collection
      * @throws Exception
+     *
+     * @return Collection
      */
     public function listJobs($domainName = null)
     {
@@ -459,8 +465,9 @@ trait Finder
      *
      * @param string $domain
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findDomainNamespace($domain)
     {
@@ -472,8 +479,9 @@ trait Finder
      *
      * @param string $domain
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findDomainJobsNamespace($domain)
     {
@@ -485,8 +493,9 @@ trait Finder
      *
      * @param string $domain
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findDomainJobsTestsNamespace($domain)
     {
@@ -540,8 +549,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findControllerNamespace($device)
     {
@@ -574,8 +584,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return \Vivid\Console\Components\Device
      * @throws Exception
+     *
+     * @return \Vivid\Console\Components\Device
      */
     public function findDevice($device)
     {
@@ -597,8 +608,9 @@ trait Finder
      *
      * @param string $domain
      *
-     * @return \Vivid\Console\Components\Domain
      * @throws Exception
+     *
+     * @return \Vivid\Console\Components\Domain
      */
     public function findDomain($domain)
     {
@@ -625,8 +637,9 @@ trait Finder
      *
      * @param string $name
      *
-     * @return \Vivid\Console\Components\Feature
      * @throws Exception
+     *
+     * @return \Vivid\Console\Components\Feature
      */
     public function findFeature($name)
     {
@@ -657,8 +670,9 @@ trait Finder
      *
      * @param string $name
      *
-     * @return \Vivid\Console\Components\Job
      * @throws Exception
+     *
+     * @return \Vivid\Console\Components\Job
      */
     public function findJob($name)
     {
@@ -691,9 +705,9 @@ trait Finder
      *
      * @param string $serviceName
      *
-     * @return \Illuminate\Support\Collection
-     *
      * @throws \Exception
+     *
+     * @return \Illuminate\Support\Collection
      */
     public function listFeatures($serviceName = '')
     {
@@ -795,8 +809,9 @@ trait Finder
     /**
      * Get the namespace for the Models.
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findModelNamespace()
     {
@@ -806,8 +821,9 @@ trait Finder
     /**
      * Get the namespace for Policies.
      *
-     * @return mixed
      * @throws Exception
+     *
+     * @return mixed
      */
     public function findPolicyNamespace()
     {
@@ -819,8 +835,9 @@ trait Finder
      *
      * @param string $device
      *
-     * @return string
      * @throws Exception
+     *
+     * @return string
      */
     public function findRequestsNamespace($device)
     {
@@ -865,5 +882,4 @@ trait Finder
     {
         return app()['path.config'].'/'.$name.'.php';
     }
-
 }

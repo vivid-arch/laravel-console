@@ -20,9 +20,9 @@ use Illuminate\Support\Str;
  */
 class Device extends Component
 {
-
     /**
      * Device constructor.
+     *
      * @param string $name
      * @param string $realPath
      * @param string $relativePath
@@ -30,11 +30,10 @@ class Device extends Component
     public function __construct(string $name, string $realPath, string $relativePath)
     {
         $this->setAttributes([
-            'name' => $name,
-            'slug' => Str::snake($name),
-            'realPath' => $realPath,
+            'name'         => $name,
+            'slug'         => Str::snake($name),
+            'realPath'     => $realPath,
             'relativePath' => $relativePath,
         ]);
     }
-
 }

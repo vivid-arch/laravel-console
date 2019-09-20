@@ -18,9 +18,9 @@ namespace Vivid\Console\Components;
  */
 class Policy extends Component
 {
-
     /**
      * Policy constructor.
+     *
      * @param string $title
      * @param string $namespace
      * @param string $file
@@ -37,12 +37,12 @@ class Policy extends Component
         string $content
     ) {
         $this->setAttributes([
-            'policy' => $title,
-            'namespace' => $namespace,
-            'file' => $file,
-            'path' => $path,
+            'policy'       => $title,
+            'namespace'    => $namespace,
+            'file'         => $file,
+            'path'         => $path,
             'relativePath' => $relativePath,
-            'content' => $content,
+            'content'      => $content,
         ]);
     }
 }
