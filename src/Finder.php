@@ -124,7 +124,7 @@ trait Finder
     }
 
     /**
-     * Determines whether this is a lucid microservice installation.
+     * Determines whether this is a vivid microservice installation.
      *
      * @return bool
      */
@@ -285,13 +285,13 @@ trait Finder
     /**
      * Find the operations root path in the given device.
      *
-     * @param string $device
+     * @param string $domain
      *
      * @return string
      */
-    public function findOperationsRootPath($device)
+    public function findOperationsRootPath($domain)
     {
-        return $this->findDevicePath($device).'/Operations';
+        return $this->findSourceRoot().'/Operations';
     }
 
     /**
@@ -323,17 +323,15 @@ trait Finder
     }
 
     /**
-     * Find the namespace for operations in the given device.
-     *
-     * @param string $device
+     * Find the namespace for operations.
      *
      * @throws Exception
      *
      * @return string
      */
-    public function findOperationNamespace($device)
+    public function findOperationNamespace()
     {
-        return $this->findDeviceNamespace($device).'\\Operations';
+        return $this->findRootNamespace().'\\Operations';
     }
 
     /**
@@ -347,7 +345,7 @@ trait Finder
      */
     public function findOperationTestNamespace($device)
     {
-        return $this->findDeviceNamespace($device).'\\Tests\\Operations';
+        return $this->findOperationNamespace().'\\Tests';
     }
 
     /**

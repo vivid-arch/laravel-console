@@ -43,7 +43,7 @@ class OperationMakeCommand extends SymfonyCommand
      *
      * @var string
      */
-    protected $description = 'Create a new Operation in a domain';
+    protected $description = 'Create a new Operation';
 
     /**
      * The type of class being generated.
@@ -63,12 +63,13 @@ class OperationMakeCommand extends SymfonyCommand
     {
         $generator = new OperationGenerator();
 
-        $device = Str::studly($this->argument('device'));
+        $domain = '';
+        //$domain = Str::studly($this->argument('domain'));
         $title = $this->parseName($this->argument('operation'));
         $isQueueable = $this->option('queue');
 
         try {
-            $operation = $generator->generate($title, $device, $isQueueable);
+            $operation = $generator->generate($title, $domain, $isQueueable);
 
             $this->info(
                 'Operation class '.$title.' created successfully.'.
@@ -84,8 +85,7 @@ class OperationMakeCommand extends SymfonyCommand
     public function getArguments()
     {
         return [
-            ['operation', InputArgument::REQUIRED, 'The operation\'s name.'],
-            ['device', InputArgument::OPTIONAL, 'The device in which the operation should be implemented.'],
+            ['operation', InputArgument::REQUIRED, 'The operation\'s name.']
         ];
     }
 

@@ -32,18 +32,18 @@ class OperationGenerator extends Generator
      *
      * @return Operation
      */
-    public function generate(string $operation, string $device, bool $isQueueable = false, array $jobs = [])
+    public function generate(string $operation, string $domain, bool $isQueueable = false, array $jobs = [])
     {
         $operation = Str::operation($operation);
-        $device = Str::device($device);
+        $domain = Str::device($domain);
 
-        $path = $this->findOperationPath($device, $operation);
+        $path = $this->findOperationPath($domain, $operation);
 
         if ($this->exists($path)) {
             throw new Exception('Operation already exists!');
         }
 
-        $namespace = $this->findOperationNamespace($device);
+        $namespace = $this->findOperationNamespace($domain);
 
         $content = file_get_contents($this->getStub($isQueueable));
 
@@ -69,14 +69,14 @@ class OperationGenerator extends Generator
         $this->createFile($path, $content);
 
         // generate test file
-        $this->generateTestFile($operation, $device);
+        $this->generateTestFile($operation, $domain);
 
         return new Operation(
             $operation,
             basename($path),
             $path,
             $this->relativeFromReal($path),
-            ($device) ? $this->findDevice($device) : null,
+            ($domain) ? $this->findDevice($domain) : null,
             $content
         );
     }
@@ -85,16 +85,16 @@ class OperationGenerator extends Generator
      * Generate the test file.
      *
      * @param string $operation
-     * @param string $device
+     * @param string $domain
      *
      * @throws Exception
      */
-    private function generateTestFile(string $operation, string $device)
+    private function generateTestFile(string $operation, string $domain)
     {
         $content = file_get_contents($this->getTestStub());
 
-        $namespace = $this->findOperationTestNamespace($device);
-        $operationNamespace = $this->findOperationNamespace($device)."\\$operation";
+        $namespace = $this->findOperationTestNamespace($domain);
+        $operationNamespace = $this->findOperationNamespace($domain)."\\$operation";
         $testClass = $operation.'Test';
 
         $content = str_replace(
@@ -103,7 +103,7 @@ class OperationGenerator extends Generator
             $content
         );
 
-        $path = $this->findOperationTestPath($device, $testClass);
+        $path = $this->findOperationTestPath($domain, $testClass);
 
         $this->createFile($path, $content);
     }

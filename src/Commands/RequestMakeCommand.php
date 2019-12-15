@@ -42,7 +42,7 @@ class RequestMakeCommand extends SymfonyCommand
      *
      * @var string
      */
-    protected $description = 'Create a Request in a specific service.';
+    protected $description = 'Create a Request in a specific device.';
 
     /**
      * The type of class being generated.
