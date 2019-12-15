@@ -97,7 +97,7 @@ trait Finder
      * Map the fuzzy-find results into the data
      * that should be returned.
      *
-     * @param  array $results
+     * @param array $results
      *
      * @return array
      */

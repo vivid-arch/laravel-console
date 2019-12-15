@@ -94,7 +94,7 @@ class DeviceMakeCommand extends SymfonyCommand
                 "\n"
             );
 
-            $this->info("<comment>'$serviceProvider' => true,</comment>" . "\n");
+            $this->info("<comment>'$serviceProvider' => true,</comment>"."\n");
         } catch (\Exception $e) {
             $this->error($e->getMessage()."\n".$e->getFile().' at '.$e->getLine());
         }
