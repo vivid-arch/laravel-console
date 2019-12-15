@@ -85,7 +85,7 @@ class OperationMakeCommand extends SymfonyCommand
     public function getArguments()
     {
         return [
-            ['operation', InputArgument::REQUIRED, 'The operation\'s name.']
+            ['operation', InputArgument::REQUIRED, 'The operation\'s name.'],
         ];
     }
 
