@@ -8,3 +8,8 @@
 The Vivid Console is reponsible for generating the components used by Vivid.
 
 [Documentation](https://vivid-arch.github.io/docs/console/getting-started/)
+
+## Packages
+
++ [vivid-arch/laravel-foundation](https://packagist.org/packages/vivid-arch/laravel-foundation)
++ [vivid-arch/laravel-console](https://packagist.org/packages/vivid-arch/laravel-console)
