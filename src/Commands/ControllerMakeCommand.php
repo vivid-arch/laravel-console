@@ -43,7 +43,7 @@ class ControllerMakeCommand extends SymfonyCommand
      *
      * @var string
      */
-    protected $description = 'Create a new resource Controller class in a device';
+    protected $description = 'Create a new Controller class in a device';
 
     /**
      * The type of class being generated.
@@ -65,15 +65,19 @@ class ControllerMakeCommand extends SymfonyCommand
 
         $device = $this->argument('device');
         $name = $this->argument('controller');
+        $isResource = $this->option('resource');
 
         try {
-            $controller = $generator->generate($name, $device, $this->option('resource'));
+            $controller = $generator->generate($name, $device, $isResource);
 
-            $this->info('Controller class created successfully.'.
-                "\n".
-                "\n".
-                'Find it at <comment>'.$controller.'</comment>'."\n"
+            $this->info(
+                "Controller class created successfully." .
+                "\n" .
+                "\n" .
+                "Find it at <comment>$controller</comment> \n"
             );
+            $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/controllers/</comment>");
+
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }

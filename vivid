@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
 
+define('VIVID_CONSOLE_VERSION', '0.4.0');
+
 if (file_exists('./vendor/autoload.php')) {
     require './vendor/autoload.php';
 } else if(file_exists(__DIR__.'/vendor/autoload.php')) {
@@ -26,7 +28,7 @@ $commands = [
     new Vivid\Console\Commands\OperationMakeCommand()
 ];
 
-$app = new Symfony\Component\Console\Application('Vivid Console', '0.1.0');
+$app = new Symfony\Component\Console\Application('Vivid Console', VIVID_CONSOLE_VERSION);
 array_walk($commands, [$app, 'add']);
 
 $app->run();

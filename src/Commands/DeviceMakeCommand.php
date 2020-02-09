@@ -14,6 +14,7 @@ namespace Vivid\Console\Commands;
 
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 use Vivid\Console\Command;
 use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
@@ -75,26 +76,28 @@ class DeviceMakeCommand extends SymfonyCommand
     {
         try {
             $name = $this->argument('name');
+            $type = $this->option('type');
+            return var_dump($type);
 
             $generator = new DeviceGenerator();
-            $device = $generator->generate($name);
+            $device = $generator->generate($name, $type);
 
-            $this->info('Device '.$device->name.' created successfully.'."\n");
+            $this->info("Device " . $device->name . " created successfully. \n");
 
             $rootNamespace = $this->findRootNamespace();
             $serviceNamespace = $this->findDeviceNamespace($device->name);
 
             $serviceProvider = $serviceNamespace.'\\Providers\\'.$device->name.'ServiceProvider';
 
-            $this->info('Activate it by registering '.
-                '<comment>'.$serviceProvider.'</comment> '.
-                "\n".
-                'in <comment>/config/vivid.php</comment> inside the \'devices\' array '.
-                'with the following:'.
-                "\n"
+            $this->info(
+                "Activate it by registering" .
+                "<comment> $serviceProvider </comment> \n" .
+                "in <comment>/config/vivid.php</comment> inside the devices array with the following: \n"
             );
 
-            $this->info("<comment>'$serviceProvider' => true,</comment>"."\n");
+            $this->info("<comment>'$serviceProvider' => true,</comment> \n");
+            $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/devices/</comment> \n");
+
         } catch (\Exception $e) {
             $this->error($e->getMessage()."\n".$e->getFile().' at '.$e->getLine());
         }
@@ -104,6 +107,13 @@ class DeviceMakeCommand extends SymfonyCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The service name.'],
+        ];
+    }
+
+    public function getOptions()
+    {
+        return [
+            ['type', null, InputOption::VALUE_REQUIRED, 'A device can be API-only or Web-only.'],
         ];
     }
 }

@@ -39,15 +39,19 @@ class DeviceGenerator extends Generator
         'Http/Requests/',
         'Providers/',
         'Features/',
-        'resources/',
-        'resources/lang/',
-        'resources/views/',
         'routes',
         'Tests/',
         'Tests/Features/',
     ];
 
-    public function generate($name)
+    protected $resourceDirectories = [
+        'js/',
+        'lang/',
+        'sass/',
+        'views/',
+    ];
+
+    public function generate($name, $type)
     {
         $name = Str::device($name);
         $slug = Str::snake($name);
@@ -59,9 +63,8 @@ class DeviceGenerator extends Generator
             return false;
         }
 
-        // create device directory
         $this->createDirectory($path);
-        // create .gitkeep file in it
+
         $this->createFile($path.'/.gitkeep');
 
         $this->createDeviceDirectories($path);
@@ -69,6 +72,8 @@ class DeviceGenerator extends Generator
         $this->addDeviceProviders($name, $slug, $path);
 
         $this->addRoutesFiles($name, $slug, $path);
+
+        $this->createResourceDirectories($name);
 
         $this->addWelcomeViewFile($path);
 
@@ -189,10 +194,20 @@ class DeviceGenerator extends Generator
      */
     public function addWelcomeViewFile($path)
     {
+        $path = resource_path('devices/' . $name);
         $this->createFile(
-            $path.'/resources/views/welcome.blade.php',
+            $path.'/views/welcome.blade.php',
             file_get_contents(__DIR__.'/stubs/welcome.blade.stub')
         );
+    }
+
+    public function createResourceDirectories($name)
+    {
+        $path = resource_path('devices/' . $name);
+        foreach ($this->resourceDirectories as $directory) {
+            $this->createDirectory($path.'/'.$directory);
+            $this->createFile($path.'/'.$directory.'/.gitkeep');
+        }
     }
 
     /**

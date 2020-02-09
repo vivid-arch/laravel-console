@@ -66,10 +66,11 @@ class RequestMakeCommand extends SymfonyCommand
         try {
             $request = $generator->generate($name, $device);
 
-            $this->info('Request class created successfully.'.
-                "\n".
-                "\n".
-                'Find it at <comment>'.$request->relativePath.'</comment>'."\n"
+            $this->info(
+                "Request class created successfully." .
+                "\n" .
+                "\n" .
+                "Find it at <comment> $request->relativePath </comment> \n"
             );
         } catch (Exception $e) {
             $this->error($e->getMessage());
