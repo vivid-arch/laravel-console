@@ -43,7 +43,7 @@ class LucidServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'lucid');
 
         $this->publishes([
-             __DIR__.'/../resources/assets' => public_path('vendor/lucid'),
+            __DIR__.'/../resources/assets' => public_path('vendor/lucid'),
         ], 'public');
     }
 

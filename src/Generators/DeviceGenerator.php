@@ -194,7 +194,7 @@ class DeviceGenerator extends Generator
      */
     public function addWelcomeViewFile($path)
     {
-        $path = resource_path('devices/' . $name);
+        $path = resource_path('devices/'.$name);
         $this->createFile(
             $path.'/views/welcome.blade.php',
             file_get_contents(__DIR__.'/stubs/welcome.blade.stub')
@@ -203,7 +203,7 @@ class DeviceGenerator extends Generator
 
     public function createResourceDirectories($name)
     {
-        $path = resource_path('devices/' . $name);
+        $path = resource_path('devices/'.$name);
         foreach ($this->resourceDirectories as $directory) {
             $this->createDirectory($path.'/'.$directory);
             $this->createFile($path.'/'.$directory.'/.gitkeep');

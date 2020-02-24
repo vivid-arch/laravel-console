@@ -68,13 +68,12 @@ class FeatureMakeCommand extends SymfonyCommand
             $feature = $generator->generate($title, $service);
 
             $this->info(
-                "Feature class $feature->title created successfully." .
-                "\n" .
-                "\n" .
+                "Feature class $feature->title created successfully.".
+                "\n".
+                "\n".
                 "Find it at <comment> $feature->relativePath </comment> \n"
             );
-            $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/features/</comment>");
-
+            $this->info('Documentation: <comment>https://vivid-arch.github.io/docs/foundation/features/</comment>');
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

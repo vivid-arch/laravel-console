@@ -71,12 +71,11 @@ class JobMakeCommand extends SymfonyCommand
             $job = $generator->generate($title, $domain, $isQueueable);
 
             $this->info(
-                "Job class $title created successfully \n" .
-                "\n" .
+                "Job class $title created successfully \n".
+                "\n".
                 "Find it at <comment> $job->relativePath </comment> \n"
             );
-            $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/jobs/</comment>");
-
+            $this->info('Documentation: <comment>https://vivid-arch.github.io/docs/foundation/jobs/</comment>');
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
