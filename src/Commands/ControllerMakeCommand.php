@@ -71,13 +71,12 @@ class ControllerMakeCommand extends SymfonyCommand
             $controller = $generator->generate($name, $device, $isResource);
 
             $this->info(
-                "Controller class created successfully." .
-                "\n" .
-                "\n" .
+                'Controller class created successfully.'.
+                "\n".
+                "\n".
                 "Find it at <comment>$controller</comment> \n"
             );
-            $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/controllers/</comment>");
-
+            $this->info('Documentation: <comment>https://vivid-arch.github.io/docs/foundation/controllers/</comment>');
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }

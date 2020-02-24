@@ -77,12 +77,13 @@ class DeviceMakeCommand extends SymfonyCommand
         try {
             $name = $this->argument('name');
             $type = $this->option('type');
+
             return var_dump($type);
 
             $generator = new DeviceGenerator();
             $device = $generator->generate($name, $type);
 
-            $this->info("Device " . $device->name . " created successfully. \n");
+            $this->info('Device '.$device->name." created successfully. \n");
 
             $rootNamespace = $this->findRootNamespace();
             $serviceNamespace = $this->findDeviceNamespace($device->name);
@@ -90,14 +91,13 @@ class DeviceMakeCommand extends SymfonyCommand
             $serviceProvider = $serviceNamespace.'\\Providers\\'.$device->name.'ServiceProvider';
 
             $this->info(
-                "Activate it by registering" .
-                "<comment> $serviceProvider </comment> \n" .
+                'Activate it by registering'.
+                "<comment> $serviceProvider </comment> \n".
                 "in <comment>/config/vivid.php</comment> inside the devices array with the following: \n"
             );
 
             $this->info("<comment>'$serviceProvider' => true,</comment> \n");
             $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/devices/</comment> \n");
-
         } catch (\Exception $e) {
             $this->error($e->getMessage()."\n".$e->getFile().' at '.$e->getLine());
         }

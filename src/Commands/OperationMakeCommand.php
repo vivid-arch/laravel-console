@@ -72,12 +72,12 @@ class OperationMakeCommand extends SymfonyCommand
             $operation = $generator->generate($title, $domain, $isQueueable);
 
             $this->info(
-                "Operation class $title created successfully." .
-                "\n" .
-                "\n" .
+                "Operation class $title created successfully.".
+                "\n".
+                "\n".
                 "Find it at <comment> $operation->relativePath </comment> \n"
             );
-            $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/operations/</comment>");
+            $this->info('Documentation: <comment>https://vivid-arch.github.io/docs/foundation/operations/</comment>');
         } catch (Exception $e) {
             $this->error($e->getMessage());
         }
