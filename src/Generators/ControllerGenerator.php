@@ -45,10 +45,10 @@ class ControllerGenerator extends Generator
 
         $content = file_get_contents($this->getStub($plain));
         $content = str_replace(
-             ['{{controller}}', '{{namespace}}', '{{foundation_namespace}}'],
-             [$name, $namespace, $this->findFoundationNamespace()],
-             $content
-         );
+            ['{{controller}}', '{{namespace}}', '{{foundation_namespace}}'],
+            [$name, $namespace, $this->findFoundationNamespace()],
+            $content
+        );
 
         $this->createFile($path, $content);
 
