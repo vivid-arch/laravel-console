@@ -192,11 +192,11 @@ class DeviceGenerator extends Generator
      *
      * @param string $path
      */
-    public function addWelcomeViewFile($path)
+    public function addWelcomeViewFile($name)
     {
         $path = resource_path('devices/'.$name);
         $this->createFile(
-            $path.'/views/welcome.blade.php',
+            $name.'/views/welcome.blade.php',
             file_get_contents(__DIR__.'/stubs/welcome.blade.stub')
         );
     }

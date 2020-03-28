@@ -76,9 +76,7 @@ class DeviceMakeCommand extends SymfonyCommand
     {
         try {
             $name = $this->argument('name');
-            $type = $this->option('type');
-
-            return var_dump($type);
+            $type = $this->option('type') ?? null;
 
             $generator = new DeviceGenerator();
             $device = $generator->generate($name, $type);
