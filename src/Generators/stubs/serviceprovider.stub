@@ -47,9 +47,9 @@ class {{name}}ServiceProvider extends ServiceProvider
         // Translation must be registered ahead of adding lang namespaces
         $this->app->register(TranslationServiceProvider::class);
 
-        Lang::addNamespace('{{slug}}', realpath(__DIR__.'/../resources/lang'));
+        Lang::addNamespace('{{slug}}', resource_path().'/devices/{{slug}}/lang');
 
         View::addNamespace('{{slug}}', base_path('resources/views/vendor/{{slug}}'));
-        View::addNamespace('{{slug}}', realpath(__DIR__.'/../resources/views'));
+        View::addNamespace('{{slug}}', resource_path().'/devices/{{slug}}/views');
     }
 }
