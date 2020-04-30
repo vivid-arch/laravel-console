@@ -39,6 +39,7 @@ class ControllerGenerator extends Generator
 
         if ($this->exists($path)) {
             throw new Exception("Controller $name already exists!");
+
             return;
         }
 

@@ -63,11 +63,11 @@ class ControllerMakeCommand extends SymfonyCommand
     {
         $generator = new ControllerGenerator();
 
-        $device     = $this->argument('device');
-        $name       = $this->argument('controller');
+        $device = $this->argument('device');
+        $name = $this->argument('controller');
 
         $isResource = $this->option('resource');
-        $invokable  = $this->option('invokable');
+        $invokable = $this->option('invokable');
 
         try {
             $controller = $generator->generate($name, $device, $isResource, $invokable);
