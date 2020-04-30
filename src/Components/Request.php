@@ -15,6 +15,14 @@ namespace Vivid\Console\Components;
 /**
  * @author Bernat Jufré <info@behind.design>
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
+ *
+ * @property string $title
+ * @property string $service
+ * @property string $namespace
+ * @property string $file
+ * @property string $path
+ * @property string $relativePath
+ * @property string $content
  */
 class Request extends Component
 {

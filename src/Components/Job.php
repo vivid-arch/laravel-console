@@ -15,6 +15,14 @@ namespace Vivid\Console\Components;
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
+ *
+ * @property string $title
+ * @property string $namespace
+ * @property string $file
+ * @property string $path
+ * @property string $relativePath
+ * @property Domain|null $domain
+ * @property string $content
  */
 class Job extends Component
 {

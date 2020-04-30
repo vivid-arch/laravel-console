@@ -15,6 +15,13 @@ namespace Vivid\Console\Components;
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
+ *
+ * @property string $title
+ * @property string $file
+ * @property string $realPath
+ * @property string $relativePath
+ * @property Device|null $service
+ * @property string $content
  */
 class Feature extends Component
 {

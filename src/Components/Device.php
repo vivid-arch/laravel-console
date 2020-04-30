@@ -17,6 +17,11 @@ use Illuminate\Support\Str;
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
+ *
+ * @property string $name
+ * @property string $slug
+ * @property string $realPath
+ * @property string $relativePath
  */
 class Device extends Component
 {
