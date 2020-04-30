@@ -54,8 +54,10 @@ class DeviceGenerator extends Generator
     /**
      * @param $name
      * @param bool $hasAssets
-     * @return bool|Device
+     *
      * @throws Exception
+     *
+     * @return bool|Device
      */
     public function generate($name, $hasAssets = true)
     {
@@ -68,7 +70,7 @@ class DeviceGenerator extends Generator
 
             return false;
         }
-        
+
         $this->createDirectory($path);
 
         $this->createFile($path.'/.gitkeep');
@@ -201,8 +203,8 @@ class DeviceGenerator extends Generator
      */
     public function addWelcomeViewFile($name)
     {
-        $path = resource_path('devices/' . $name);
-        
+        $path = resource_path('devices/'.$name);
+
         $this->createFile(
             $path.'/views/welcome.blade.php',
             file_get_contents(__DIR__.'/stubs/welcome.blade.stub')
@@ -211,10 +213,10 @@ class DeviceGenerator extends Generator
 
     public function createResourceDirectories($name)
     {
-        $path = resource_path('devices/' . lcfirst($name));
+        $path = resource_path('devices/'.lcfirst($name));
         foreach ($this->resourceDirectories as $directory) {
-            $this->createDirectory($path . '/' . $directory);
-            $this->createFile($path . '/' . $directory . '/.gitkeep');
+            $this->createDirectory($path.'/'.$directory);
+            $this->createFile($path.'/'.$directory.'/.gitkeep');
         }
     }
 
