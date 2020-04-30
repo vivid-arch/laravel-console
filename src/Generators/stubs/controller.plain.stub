@@ -7,5 +7,5 @@ use {{foundation_namespace}}\Http\Controller;
 
 class {{controller}} extends Controller
 {
-
+	
 }

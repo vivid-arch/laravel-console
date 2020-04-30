@@ -14,7 +14,7 @@ class {{controller}} extends Controller
      */
     public function index()
     {
-        //
+        // $this->serve();
     }
 
     /**
@@ -24,18 +24,17 @@ class {{controller}} extends Controller
      */
     public function create()
     {
-        //
+        // $this->serve();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // $this->serve();
     }
 
     /**
@@ -46,7 +45,7 @@ class {{controller}} extends Controller
      */
     public function show($id)
     {
-        //
+        // $this->serve();
     }
 
     /**
@@ -57,19 +56,18 @@ class {{controller}} extends Controller
      */
     public function edit($id)
     {
-        //
+        // $this->serve();
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        // $this->serve();
     }
 
     /**
@@ -80,6 +78,6 @@ class {{controller}} extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $this->serve();
     }
 }

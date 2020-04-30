@@ -24,13 +24,13 @@ class ControllerGenerator extends Generator
     /**
      * @param string $name
      * @param string $device
-     * @param bool   $plain
+     * @param bool   $isResource
      *
      * @throws Exception
      *
      * @return string
      */
-    public function generate(string $name, string $device, bool $plain = false)
+    public function generate(string $name, string $device, bool $isResource = false, bool $invokable = false)
     {
         $name = Str::controller($name);
         $device = Str::device($device);
@@ -39,11 +39,12 @@ class ControllerGenerator extends Generator
 
         if ($this->exists($path)) {
             throw new Exception("Controller $name already exists!");
+            return;
         }
 
         $namespace = $this->findControllerNamespace($device);
 
-        $content = file_get_contents($this->getStub($plain));
+        $content = file_get_contents($this->getStub($isResource));
         $content = str_replace(
             ['{{controller}}', '{{namespace}}', '{{foundation_namespace}}'],
             [$name, $namespace, $this->findFoundationNamespace()],

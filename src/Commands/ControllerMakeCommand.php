@@ -43,7 +43,7 @@ class ControllerMakeCommand extends SymfonyCommand
      *
      * @var string
      */
-    protected $description = 'Create a new Controller class in a device';
+    protected $description = 'Create a new Controller class in a Device';
 
     /**
      * The type of class being generated.
@@ -63,12 +63,14 @@ class ControllerMakeCommand extends SymfonyCommand
     {
         $generator = new ControllerGenerator();
 
-        $device = $this->argument('device');
-        $name = $this->argument('controller');
+        $device     = $this->argument('device');
+        $name       = $this->argument('controller');
+
         $isResource = $this->option('resource');
+        $invokable  = $this->option('invokable');
 
         try {
-            $controller = $generator->generate($name, $device, $isResource);
+            $controller = $generator->generate($name, $device, $isResource, $invokable);
 
             $this->info(
                 'Controller class created successfully.'.
