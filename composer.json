@@ -6,7 +6,8 @@
     "authors": [
         {
             "name": "Meletios Flevarakis",
-            "email": "m.flevarakis@gmail.com"
+            "email": "m.flevarakis@gmail.com",
+            "role": "Lead"
         }
     ],
     "autoload": {
@@ -17,11 +18,7 @@
     "bin": ["vivid"],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.1.0",
-        "symfony/console": "^4.1",
-        "symfony/process": "^4.1",
-        "symfony/finder": "^4.1",
-        "symfony/filesystem": "^4.1",
-        "phploc/phploc": "~4.0"
+        "php": ">=7.2.0"
+        
     }
 }
