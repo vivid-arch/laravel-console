@@ -76,12 +76,12 @@ class DeviceMakeCommand extends SymfonyCommand
     {
         try {
             $name = $this->argument('name');
-            $type = $this->option('type') ?? null;
+            $hasAssets = $this->option('no-assets') ?? true;
 
             $generator = new DeviceGenerator();
-            $device = $generator->generate($name, $type);
+            $device = $generator->generate($name, $hasAssets);
 
-            $this->info('Device '.$device->name." created successfully. \n");
+            $this->info('Device '. $device->name ." created successfully. \n");
 
             $rootNamespace = $this->findRootNamespace();
             $serviceNamespace = $this->findDeviceNamespace($device->name);

@@ -51,7 +51,13 @@ class DeviceGenerator extends Generator
         'views/',
     ];
 
-    public function generate($name, $type)
+    /**
+     * @param $name
+     * @param bool $hasAssets
+     * @return bool|Device
+     * @throws Exception
+     */
+    public function generate($name, $hasAssets = true)
     {
         $name = Str::device($name);
         $slug = Str::snake($name);
@@ -62,7 +68,7 @@ class DeviceGenerator extends Generator
 
             return false;
         }
-
+        
         $this->createDirectory($path);
 
         $this->createFile($path.'/.gitkeep');
@@ -73,13 +79,14 @@ class DeviceGenerator extends Generator
 
         $this->addRoutesFiles($name, $slug, $path);
 
-        $this->createResourceDirectories($name);
+        if ($hasAssets) {
+            $this->createResourceDirectories($name);
 
-        $this->addWelcomeViewFile($path);
+            $this->addWelcomeViewFile($name);
+        }
 
         return new Device(
             $name,
-            $slug,
             $path,
             $this->relativeFromReal($path)
         );
@@ -173,7 +180,7 @@ class DeviceGenerator extends Generator
      */
     public function addRoutesFiles($name, $slug, $path)
     {
-        $controllers = 'src/Devices/'.$name.'/Http/Controllers';
+        $controllers = 'app/Devices/'.$name.'/Http/Controllers';
 
         $contentApi = file_get_contents(__DIR__.'/stubs/routes-api.stub');
         $contentApi = str_replace(['{{slug}}', '{{controllers_path}}'], [$slug, $controllers], $contentApi);
@@ -190,23 +197,24 @@ class DeviceGenerator extends Generator
     /**
      * Add the welcome view file.
      *
-     * @param string $path
+     * @param string $name
      */
     public function addWelcomeViewFile($name)
     {
-        $path = resource_path('devices/'.$name);
+        $path = resource_path('devices/' . $name);
+        
         $this->createFile(
-            $name.'/views/welcome.blade.php',
+            $path.'/views/welcome.blade.php',
             file_get_contents(__DIR__.'/stubs/welcome.blade.stub')
         );
     }
 
     public function createResourceDirectories($name)
     {
-        $path = resource_path('devices/'.$name);
+        $path = resource_path('devices/' . lcfirst($name));
         foreach ($this->resourceDirectories as $directory) {
-            $this->createDirectory($path.'/'.$directory);
-            $this->createFile($path.'/'.$directory.'/.gitkeep');
+            $this->createDirectory($path . '/' . $directory);
+            $this->createFile($path . '/' . $directory . '/.gitkeep');
         }
     }
 
