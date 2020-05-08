@@ -81,7 +81,7 @@ class DeviceMakeCommand extends SymfonyCommand
             $generator = new DeviceGenerator();
             $device = $generator->generate($name, true);
 
-            $this->info('Device '. $device->name ." created successfully. \n");
+            $this->info('Device '.$device->name." created successfully. \n");
 
             $rootNamespace = $this->findRootNamespace();
             $serviceNamespace = $this->findDeviceNamespace($device->name);
