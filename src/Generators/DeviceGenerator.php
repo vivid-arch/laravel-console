@@ -53,13 +53,13 @@ class DeviceGenerator extends Generator
 
     /**
      * @param $name
-     * @param bool $hasAssets
-     *
-     * @throws Exception
+     * @param bool $noAssets
      *
      * @return bool|Device
+     *@throws Exception
+     *
      */
-    public function generate($name, $hasAssets = true)
+    public function generate($name, $noAssets)
     {
         $name = Str::device($name);
         $slug = Str::snake($name);
@@ -81,7 +81,7 @@ class DeviceGenerator extends Generator
 
         $this->addRoutesFiles($name, $slug, $path);
 
-        if ($hasAssets) {
+        if (! $noAssets) {
             $this->createResourceDirectories($name);
 
             $this->addWelcomeViewFile($name);

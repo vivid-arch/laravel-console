@@ -70,16 +70,16 @@ class DeviceMakeCommand extends SymfonyCommand
     /**
      * Execute the console command.
      *
-     * @return bool|null
+     * @return void
      */
     public function handle()
     {
         try {
             $name = $this->argument('name');
-            //$hasAssets = $this->option('no-assets') ?? true;
+            $noAssets = $this->option('no-assets');
 
             $generator = new DeviceGenerator();
-            $device = $generator->generate($name, true);
+            $device = $generator->generate($name, $noAssets);
 
             $this->info('Device '.$device->name." created successfully. \n");
 
@@ -111,7 +111,7 @@ class DeviceMakeCommand extends SymfonyCommand
     public function getOptions()
     {
         return [
-            ['type', null, InputOption::VALUE_REQUIRED, 'A device can be API-only or Web-only.'],
+            ['no-assets', null, InputOption::VALUE_NONE, 'Specify if a Device has Assets.'],
         ];
     }
 }
