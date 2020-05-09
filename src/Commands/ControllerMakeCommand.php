@@ -69,12 +69,13 @@ class ControllerMakeCommand extends SymfonyCommand
         $isResource = $this->option('resource');
         $isInvokable = $this->option('invokable');
 
-        if ($isResource)
+        if ($isResource) {
             $stubType = 'resource';
-        elseif ($isInvokable)
+        } elseif ($isInvokable) {
             $stubType = 'invokable';
-        else
+        } else {
             $stubType = 'plain';
+        }
 
         try {
             $controller = $generator->generate($name, $device, $stubType);

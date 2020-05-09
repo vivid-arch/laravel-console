@@ -25,8 +25,10 @@ class ControllerGenerator extends Generator
      * @param string $name
      * @param string $device
      * @param string $type
-     * @return string
+     *
      * @throws Exception
+     *
+     * @return string
      */
     public function generate(string $name, string $device, string $type = 'plain')
     {
@@ -64,11 +66,13 @@ class ControllerGenerator extends Generator
      */
     protected function getStub(string $type)
     {
-        if ($type === 'resource')
+        if ($type === 'resource') {
             return __DIR__.'/stubs/controller.stub';
+        }
 
-        if ($type === 'invokable')
+        if ($type === 'invokable') {
             return __DIR__.'/stubs/controller.invokable.stub';
+        }
 
         return __DIR__.'/stubs/controller.plain.stub';
     }
