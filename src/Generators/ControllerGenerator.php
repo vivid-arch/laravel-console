@@ -24,13 +24,11 @@ class ControllerGenerator extends Generator
     /**
      * @param string $name
      * @param string $device
-     * @param bool   $isResource
-     *
-     * @throws Exception
-     *
+     * @param string $type
      * @return string
+     * @throws Exception
      */
-    public function generate(string $name, string $device, bool $isResource = false, bool $invokable = false)
+    public function generate(string $name, string $device, string $type = 'plain')
     {
         $name = Str::controller($name);
         $device = Str::device($device);
@@ -45,7 +43,7 @@ class ControllerGenerator extends Generator
 
         $namespace = $this->findControllerNamespace($device);
 
-        $content = file_get_contents($this->getStub($isResource));
+        $content = file_get_contents($this->getStub($type));
         $content = str_replace(
             ['{{controller}}', '{{namespace}}', '{{foundation_namespace}}'],
             [$name, $namespace, $this->findFoundationNamespace()],
@@ -60,15 +58,17 @@ class ControllerGenerator extends Generator
     /**
      * Get the stub file for the generator.
      *
-     * @param string $resource
+     * @param string $type
      *
      * @return string
      */
-    protected function getStub(string $resource)
+    protected function getStub(string $type)
     {
-        if ($resource) {
+        if ($type === 'resource')
             return __DIR__.'/stubs/controller.stub';
-        }
+
+        if ($type === 'invokable')
+            return __DIR__.'/stubs/controller.invokable.stub';
 
         return __DIR__.'/stubs/controller.plain.stub';
     }

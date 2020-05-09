@@ -67,10 +67,17 @@ class ControllerMakeCommand extends SymfonyCommand
         $name = $this->argument('controller');
 
         $isResource = $this->option('resource');
-        $invokable = $this->option('invokable');
+        $isInvokable = $this->option('invokable');
+
+        if ($isResource)
+            $stubType = 'resource';
+        elseif ($isInvokable)
+            $stubType = 'invokable';
+        else
+            $stubType = 'plain';
 
         try {
-            $controller = $generator->generate($name, $device, $isResource, $invokable);
+            $controller = $generator->generate($name, $device, $stubType);
 
             $this->info(
                 'Controller class created successfully.'.
@@ -106,6 +113,7 @@ class ControllerMakeCommand extends SymfonyCommand
     {
         return [
             ['resource', null, InputOption::VALUE_NONE, 'Generate a resource controller class.'],
+            ['invokable', null, InputOption::VALUE_NONE, 'Generate a resource controller class.'],
         ];
     }
 
