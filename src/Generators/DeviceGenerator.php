@@ -55,9 +55,9 @@ class DeviceGenerator extends Generator
      * @param $name
      * @param bool $noAssets
      *
-     * @return bool|Device
      *@throws Exception
      *
+     * @return bool|Device
      */
     public function generate($name, $noAssets)
     {
@@ -81,7 +81,7 @@ class DeviceGenerator extends Generator
 
         $this->addRoutesFiles($name, $slug, $path);
 
-        if (! $noAssets) {
+        if (!$noAssets) {
             $this->createResourceDirectories($name);
 
             $this->addWelcomeViewFile($name);
