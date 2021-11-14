@@ -17,36 +17,18 @@ use Symfony\Component\Console\Input\InputArgument;
 use Vivid\Console\Command;
 use Vivid\Console\Finder;
 
-/**
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class FeaturesListCommand extends SymfonyCommand
 {
     use Finder;
     use Command;
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'list:features';
+    protected string $name = 'list:features';
+    protected string $description = 'List the features.';
 
     /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'List the features.';
-
-    /**
-     * Execute the console command.
-     *
      * @throws \Exception
-     *
-     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         foreach ($this->listFeatures($this->argument('device')) as $device => $features) {
             $this->comment("\n$device\n");
@@ -57,12 +39,7 @@ class FeaturesListCommand extends SymfonyCommand
         }
     }
 
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['device', InputArgument::OPTIONAL, 'The device to list the features of.'],

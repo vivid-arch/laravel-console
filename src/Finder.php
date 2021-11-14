@@ -21,8 +21,6 @@ use Vivid\Console\Components\Domain;
 use Vivid\Console\Components\Feature;
 use Vivid\Console\Components\Job;
 
-define('DS', DIRECTORY_SEPARATOR);
-
 /**
  * @author Abed Halawi <abed.halawi@vinelab.com>
  * @author Meletios Flevarakis <m.flevarakis@gmail.com>
@@ -40,8 +38,8 @@ trait Finder
     {
         $finder = new SymfonyFinder();
 
-        $files = $finder->in($this->findDevicesRootPath().'/*/Features') // features
-            ->in($this->findDomainsRootPath().'/*/Jobs') // jobs
+        $files = $finder->in($this->findDevicesRootPath() . '/*/Features') // features
+            ->in($this->findDomainsRootPath() . '/*/Jobs') // jobs
             ->name('*.php')
             ->files();
 
@@ -116,7 +114,7 @@ trait Finder
      */
     public function getSourceDirectoryName()
     {
-        if (file_exists(base_path().'/'.$this->srcDirectoryName)) {
+        if (file_exists(base_path() . '/' . $this->srcDirectoryName)) {
             return $this->srcDirectoryName;
         }
 
@@ -143,11 +141,11 @@ trait Finder
     public function findRootNamespace()
     {
         // read composer.json file contents to determine the namespace
-        $composer = json_decode(file_get_contents(base_path().'/composer.json'), true);
+        $composer = json_decode(file_get_contents(base_path() . '/composer.json'), true);
 
         // see which one refers to the "src/" directory
         foreach ($composer['autoload']['psr-4'] as $namespace => $directory) {
-            if ($directory === $this->getSourceDirectoryName().'/') {
+            if ($directory === $this->getSourceDirectoryName() . '/') {
                 return trim($namespace, '\\');
             }
         }
@@ -188,7 +186,7 @@ trait Finder
      */
     public function findSourceRoot()
     {
-        return ($this->isMicroservice()) ? app_path() : base_path().'/'.$this->srcDirectoryName;
+        return ($this->isMicroservice()) ? app_path() : base_path() . '/' . $this->srcDirectoryName;
     }
 
     /**
@@ -198,7 +196,7 @@ trait Finder
      */
     public function findDevicesRootPath()
     {
-        return $this->findSourceRoot().'/Devices';
+        return $this->findSourceRoot() . '/Devices';
     }
 
     /**
@@ -211,7 +209,7 @@ trait Finder
      */
     public function findDevicePath($device)
     {
-        return (!$device) ? app_path() : $this->findDevicesRootPath()."/$device";
+        return (!$device) ? app_path() : $this->findDevicesRootPath() . "/$device";
     }
 
     /**
@@ -223,7 +221,7 @@ trait Finder
      */
     public function findFeaturesRootPath($device)
     {
-        return $this->findDevicePath($device).'/Features';
+        return $this->findDevicePath($device) . '/Features';
     }
 
     /**
@@ -236,7 +234,7 @@ trait Finder
      */
     public function findFeaturePath($device, $feature)
     {
-        return $this->findFeaturesRootPath($device)."/$feature.php";
+        return $this->findFeaturesRootPath($device) . "/$feature.php";
     }
 
     /**
@@ -249,7 +247,7 @@ trait Finder
      */
     public function findFeatureTestPath($device, $test)
     {
-        $root = ($device) ? $this->findDevicePath($device).'/Tests' : base_path().'/tests';
+        $root = ($device) ? $this->findDevicePath($device) . '/Tests' : base_path() . '/tests';
 
         return "$root/Features/$test.php";
     }
@@ -265,7 +263,7 @@ trait Finder
      */
     public function findFeatureNamespace($device)
     {
-        return $this->findDeviceNamespace($device).'\\Features';
+        return $this->findDeviceNamespace($device) . '\\Features';
     }
 
     /**
@@ -279,7 +277,7 @@ trait Finder
      */
     public function findFeatureTestNamespace($device)
     {
-        return $this->findDeviceNamespace($device).'\\Tests\\Features';
+        return $this->findDeviceNamespace($device) . '\\Tests\\Features';
     }
 
     /**
@@ -291,7 +289,7 @@ trait Finder
      */
     public function findOperationsRootPath($domain)
     {
-        return $this->findSourceRoot().'/Operations';
+        return $this->findSourceRoot() . '/Operations';
     }
 
     /**
@@ -304,7 +302,7 @@ trait Finder
      */
     public function findOperationPath($device, $operation)
     {
-        return $this->findOperationsRootPath($device)."/$operation.php";
+        return $this->findOperationsRootPath($device) . "/$operation.php";
     }
 
     /**
@@ -317,7 +315,7 @@ trait Finder
      */
     public function findOperationTestPath($device, $test)
     {
-        $root = ($device) ? $this->findDevicePath($device).'/Tests' : base_path().'/tests';
+        $root = ($device) ? $this->findDevicePath($device) . '/Tests' : base_path() . '/tests';
 
         return "$root/Operations/$test.php";
     }
@@ -331,7 +329,7 @@ trait Finder
      */
     public function findOperationNamespace()
     {
-        return $this->findRootNamespace().'\\Operations';
+        return $this->findRootNamespace() . '\\Operations';
     }
 
     /**
@@ -345,7 +343,7 @@ trait Finder
      */
     public function findOperationTestNamespace($device)
     {
-        return $this->findOperationNamespace().'\\Tests';
+        return $this->findOperationNamespace() . '\\Tests';
     }
 
     /**
@@ -355,7 +353,7 @@ trait Finder
      */
     public function findDomainsRootPath()
     {
-        return $this->findSourceRoot().'/Domains';
+        return $this->findSourceRoot() . '/Domains';
     }
 
     /**
@@ -367,7 +365,7 @@ trait Finder
      */
     public function findDomainPath($domain)
     {
-        return $this->findDomainsRootPath()."/$domain";
+        return $this->findDomainsRootPath() . "/$domain";
     }
 
     /**
@@ -421,7 +419,7 @@ trait Finder
             $finder = new SymfonyFinder();
             $files = $finder
                 ->name('*Job.php')
-                ->in($path.'/Jobs')
+                ->in($path . '/Jobs')
                 ->files();
 
             $jobs[$domain->name] = new Collection();
@@ -455,7 +453,7 @@ trait Finder
      */
     public function findJobPath($domain, $job)
     {
-        return $this->findDomainPath($domain).DS.'Jobs'.DS.$job.'.php';
+        return $this->findDomainPath($domain) . DS . 'Jobs' . DS . $job . '.php';
     }
 
     /**
@@ -469,7 +467,7 @@ trait Finder
      */
     public function findDomainNamespace($domain)
     {
-        return $this->findRootNamespace().'\\Domains\\'.$domain;
+        return $this->findRootNamespace() . '\\Domains\\' . $domain;
     }
 
     /**
@@ -483,7 +481,7 @@ trait Finder
      */
     public function findDomainJobsNamespace($domain)
     {
-        return $this->findDomainNamespace($domain).'\Jobs';
+        return $this->findDomainNamespace($domain) . '\Jobs';
     }
 
     /**
@@ -497,7 +495,7 @@ trait Finder
      */
     public function findDomainJobsTestsNamespace($domain)
     {
-        return $this->findDomainNamespace($domain).'\Tests\Jobs';
+        return $this->findDomainNamespace($domain) . '\Tests\Jobs';
     }
 
     /**
@@ -510,10 +508,10 @@ trait Finder
     public function findDomainTestsPath($domain)
     {
         if ($this->isMicroservice()) {
-            return base_path().DS.'tests'.DS.'Domains'.DS.$domain;
+            return base_path() . DS . 'tests' . DS . 'Domains' . DS . $domain;
         }
 
-        return $this->findDomainPath($domain).DS.'Tests';
+        return $this->findDomainPath($domain) . DS . 'Tests';
     }
 
     /**
@@ -526,7 +524,7 @@ trait Finder
      */
     public function findJobTestPath($domain, $jobTest)
     {
-        return $this->findDomainTestsPath($domain).DS.'Jobs'.DS.$jobTest.'.php';
+        return $this->findDomainTestsPath($domain) . DS . 'Jobs' . DS . $jobTest . '.php';
     }
 
     /**
@@ -539,7 +537,7 @@ trait Finder
      */
     public function findControllerPath($device, $controller)
     {
-        return $this->findDevicePath($device).'/Http/Controllers/'.$controller.'.php';
+        return $this->findDevicePath($device) . '/Http/Controllers/' . $controller . '.php';
     }
 
     /**
@@ -553,7 +551,7 @@ trait Finder
      */
     public function findControllerNamespace($device)
     {
-        return $this->findDeviceNamespace($device).'\\Http\\Controllers';
+        return $this->findDeviceNamespace($device) . '\\Http\\Controllers';
     }
 
     /**
@@ -591,7 +589,7 @@ trait Finder
         $finder = new SymfonyFinder();
         $dirs = $finder->name($device)->in($this->findDevicesRootPath())->directories();
         if ($dirs->count() < 1) {
-            throw new Exception('Service "'.$device.'" could not be found.');
+            throw new Exception('Service "' . $device . '" could not be found.');
         }
 
         foreach ($dirs as $dir) {
@@ -615,7 +613,7 @@ trait Finder
         $finder = new SymfonyFinder();
         $dirs = $finder->name($domain)->in($this->findDomainsRootPath())->directories();
         if ($dirs->count() < 1) {
-            throw new Exception('Domain "'.$domain.'" could not be found.');
+            throw new Exception('Domain "' . $domain . '" could not be found.');
         }
 
         foreach ($dirs as $dir) {
@@ -717,7 +715,7 @@ trait Finder
             });
 
             if ($services->isEmpty()) {
-                throw new InvalidArgumentException('Service "'.$serviceName.'" could not be found.');
+                throw new InvalidArgumentException('Service "' . $serviceName . '" could not be found.');
             }
         }
 
@@ -754,7 +752,7 @@ trait Finder
      */
     public function findModelPath($model)
     {
-        return $this->getSourceDirectoryName().'/Data/'.$model.'.php';
+        return $this->getSourceDirectoryName() . '/Data/' . $model . '.php';
     }
 
     /**
@@ -764,7 +762,7 @@ trait Finder
      */
     public function findPoliciesPath()
     {
-        return $this->getSourceDirectoryName().'/Policies';
+        return $this->getSourceDirectoryName() . '/Policies';
     }
 
     /**
@@ -776,7 +774,7 @@ trait Finder
      */
     public function findPolicyPath($policy)
     {
-        return $this->findPoliciesPath().'/'.$policy.'.php';
+        return $this->findPoliciesPath() . '/' . $policy . '.php';
     }
 
     /**
@@ -788,7 +786,7 @@ trait Finder
      */
     public function findRequestsPath($service)
     {
-        return $this->findDevicePath($service).'/Http/Requests';
+        return $this->findDevicePath($service) . '/Http/Requests';
     }
 
     /**
@@ -801,7 +799,7 @@ trait Finder
      */
     public function findRequestPath($service, $request)
     {
-        return $this->findRequestsPath($service).'/'.$request.'.php';
+        return $this->findRequestsPath($service) . '/' . $request . '.php';
     }
 
     /**
@@ -813,7 +811,7 @@ trait Finder
      */
     public function findModelNamespace()
     {
-        return $this->findRootNamespace().'\\Data';
+        return $this->findRootNamespace() . '\\Data';
     }
 
     /**
@@ -825,7 +823,7 @@ trait Finder
      */
     public function findPolicyNamespace()
     {
-        return $this->findRootNamespace().'\\Policies';
+        return $this->findRootNamespace() . '\\Policies';
     }
 
     /**
@@ -839,7 +837,7 @@ trait Finder
      */
     public function findRequestsNamespace($device)
     {
-        return $this->findDeviceNamespace($device).'\\Http\\Requests';
+        return $this->findDeviceNamespace($device) . '\\Http\\Requests';
     }
 
     /**
@@ -853,7 +851,7 @@ trait Finder
     protected function relativeFromReal($path, $needle = '')
     {
         if (!$needle) {
-            $needle = $this->getSourceDirectoryName().'/';
+            $needle = $this->getSourceDirectoryName() . '/';
         }
 
         return strstr($path, $needle);
@@ -866,7 +864,7 @@ trait Finder
      */
     protected function getComposerPath()
     {
-        return app()->basePath().'/composer.json';
+        return app()->basePath() . '/composer.json';
     }
 
     /**
@@ -878,6 +876,6 @@ trait Finder
      */
     protected function getConfigPath($name)
     {
-        return app()['path.config'].'/'.$name.'.php';
+        return app()['path.config'] . '/' . $name . '.php';
     }
 }

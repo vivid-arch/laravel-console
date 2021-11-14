@@ -12,27 +12,15 @@
 
 namespace Vivid\Console\Generators;
 
-use Exception;
 use Vivid\Console\Components\Operation;
 use Vivid\Console\Str;
 
-/**
- * @author Ali Issa <ali@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class OperationGenerator extends Generator
 {
     /**
-     * @param string $operation
-     * @param string $device
-     * @param bool   $isQueueable
-     * @param array  $jobs
-     *
-     * @throws Exception
-     *
-     * @return Operation
+     * @throws \Exception
      */
-    public function generate(string $operation, string $domain, bool $isQueueable = false, array $jobs = [])
+    public function generate(string $operation, string $domain, bool $isQueueable = false, array $jobs = []): Operation
     {
         $operation = Str::operation($operation);
         $domain = Str::device($domain);
@@ -40,7 +28,7 @@ class OperationGenerator extends Generator
         $path = $this->findOperationPath($domain, $operation);
 
         if ($this->exists($path)) {
-            throw new Exception('Operation already exists!');
+            throw new \Exception('Operation already exists!');
         }
 
         $namespace = $this->findOperationNamespace($domain);
@@ -51,8 +39,8 @@ class OperationGenerator extends Generator
         $runJobs = ''; // stores the `$this->run` statements of the jobs
 
         foreach ($jobs as $index => $job) {
-            $useJobs .= 'use '.$job['namespace'].'\\'.$job['className'].";\n";
-            $runJobs .= "\t\t".'$this->run('.$job['className'].'::class);';
+            $useJobs .= 'use ' . $job['namespace'] . '\\' . $job['className'] . ";\n";
+            $runJobs .= "\t\t" . '$this->run(' . $job['className'] . '::class);';
 
             // only add carriage returns when it's not the last job
             if ($index != count($jobs) - 1) {
@@ -84,18 +72,15 @@ class OperationGenerator extends Generator
     /**
      * Generate the test file.
      *
-     * @param string $operation
-     * @param string $domain
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     private function generateTestFile(string $operation, string $domain)
     {
         $content = file_get_contents($this->getTestStub());
 
         $namespace = $this->findOperationTestNamespace($domain);
-        $operationNamespace = $this->findOperationNamespace($domain)."\\$operation";
-        $testClass = $operation.'Test';
+        $operationNamespace = $this->findOperationNamespace($domain) . "\\$operation";
+        $testClass = $operation . 'Test';
 
         $content = str_replace(
             ['{{namespace}}', '{{testclass}}', '{{operation}}', '{{operation_namespace}}'],
@@ -110,12 +95,8 @@ class OperationGenerator extends Generator
 
     /**
      * Get the stub file for the generator.
-     *
-     * @param bool $isQueueable
-     *
-     * @return string
      */
-    protected function getStub(bool $isQueueable = false)
+    protected function getStub(bool $isQueueable = false): string
     {
         if ($isQueueable) {
             $stubName = '/stubs/queueable-operation.stub';
@@ -123,16 +104,14 @@ class OperationGenerator extends Generator
             $stubName = '/stubs/operation.stub';
         }
 
-        return __DIR__.$stubName;
+        return __DIR__ . $stubName;
     }
 
     /**
      * Get the test stub file for the generator.
-     *
-     * @return string
      */
-    private function getTestStub()
+    private function getTestStub(): string
     {
-        return __DIR__.'/stubs/operation-test.stub';
+        return __DIR__ . '/stubs/operation-test.stub';
     }
 }

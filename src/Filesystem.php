@@ -23,12 +23,8 @@ trait Filesystem
 {
     /**
      * Determine if a file or directory exists.
-     *
-     * @param string $path
-     *
-     * @return bool
      */
-    public function exists($path)
+    public function exists(string $path): bool
     {
         return file_exists($path);
     }

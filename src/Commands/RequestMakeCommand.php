@@ -12,7 +12,6 @@
 
 namespace Vivid\Console\Commands;
 
-use Exception;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Vivid\Console\Command;
@@ -20,43 +19,17 @@ use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
 use Vivid\Console\Generators\RequestGenerator;
 
-/**
- * @author Bernat Jufré <info@behind.design>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class RequestMakeCommand extends SymfonyCommand
 {
     use Finder;
     use Command;
     use Filesystem;
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'make:request';
+    protected string $name = 'make:request';
+    protected string $description = 'Create a Request in a specific device.';
+    protected string $type = 'Request';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a Request in a specific device.';
-
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $type = 'Request';
-
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
+    public function handle(): void
     {
         $generator = new RequestGenerator();
 
@@ -67,22 +40,17 @@ class RequestMakeCommand extends SymfonyCommand
             $request = $generator->generate($name, $device);
 
             $this->info(
-                'Request class created successfully.'.
-                "\n".
-                "\n".
+                'Request class created successfully.' .
+                "\n" .
+                "\n" .
                 "Find it at <comment> $request->relativePath </comment> \n"
             );
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
 
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    public function getArguments()
+    public function getArguments(): array
     {
         return [
             ['request', InputArgument::REQUIRED, 'The Request\'s name.'],
@@ -92,11 +60,9 @@ class RequestMakeCommand extends SymfonyCommand
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    public function getStub()
+    public function getStub(): string
     {
-        return __DIR__.'/../Generators/stubs/request.stub';
+        return __DIR__ . '/../Generators/stubs/request.stub';
     }
 }

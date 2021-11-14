@@ -21,45 +21,20 @@ use Vivid\Console\Finder;
 use Vivid\Console\Generators\OperationGenerator;
 use Vivid\Console\Str;
 
-/**
- * @author Ali Issa <ali@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class OperationMakeCommand extends SymfonyCommand
 {
     use Finder;
     use Command;
     use Filesystem;
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'make:operation {--Q|queue}';
+    protected string $name = 'make:operation {--Q|queue}';
+    protected string $description = 'Create a new Operation';
+    protected string $type = 'Operation';
 
     /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new Operation';
-
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $type = 'Operation';
-
-    /**
-     * Execute the console command.
-     *
      * @throws \Exception
-     *
-     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $generator = new OperationGenerator();
 
@@ -72,25 +47,25 @@ class OperationMakeCommand extends SymfonyCommand
             $operation = $generator->generate($title, $domain, $isQueueable);
 
             $this->info(
-                "Operation class $title created successfully.".
-                "\n".
-                "\n".
+                "Operation class $title created successfully." .
+                "\n" .
+                "\n" .
                 "Find it at <comment> $operation->relativePath </comment> \n"
             );
             $this->info('Documentation: <comment>https://vivid-arch.github.io/docs/foundation/operations/</comment>');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
 
-    public function getArguments()
+    public function getArguments(): array
     {
         return [
             ['operation', InputArgument::REQUIRED, 'The operation\'s name.'],
         ];
     }
 
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             ['queue', 'Q', InputOption::VALUE_NONE, 'Whether a operation is queueable or not.'],
@@ -99,24 +74,18 @@ class OperationMakeCommand extends SymfonyCommand
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    public function getStub()
+    public function getStub(): string
     {
-        return __DIR__.'/../Generators/stubs/operation.stub';
+        return __DIR__ . '/../Generators/stubs/operation.stub';
     }
 
     /**
      * Parse the operation name.
      *  remove the Operation.php suffix if found
      *  we're adding it ourselves.
-     *
-     * @param string $name
-     *
-     * @return string
      */
-    protected function parseName($name)
+    protected function parseName(string $name): string
     {
         return Str::operation($name);
     }

@@ -21,45 +21,17 @@ use Vivid\Console\Finder;
 use Vivid\Console\Generators\ControllerGenerator;
 use Vivid\Console\Str;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class ControllerMakeCommand extends SymfonyCommand
 {
     use Finder;
     use Command;
     use Filesystem;
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'make:controller';
+    protected string $name = 'make:controller';
+    protected string $description = 'Create a new Controller class in a Device';
+    protected string $type = 'Controller';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new Controller class in a Device';
-
-    /**
-     * The type of class being generated.
-     *
-     * @var string
-     */
-    protected $type = 'Controller';
-
-    /**
-     * Execute the console command.
-     *
-     * @throws \Exception
-     *
-     * @return void
-     */
-    public function handle()
+    public function handle(): void
     {
         $generator = new ControllerGenerator();
 
@@ -81,23 +53,21 @@ class ControllerMakeCommand extends SymfonyCommand
             $controller = $generator->generate($name, $device, $stubType);
 
             $this->info(
-                'Controller class created successfully.'.
-                "\n".
-                "\n".
+                'Controller class created successfully.' .
+                "\n" .
+                "\n" .
                 "Find it at <comment>$controller</comment> \n"
             );
             $this->info('Documentation: <comment>https://vivid-arch.github.io/docs/foundation/controllers/</comment>');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
 
     /**
      * Get the console command arguments.
-     *
-     * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['controller', InputArgument::REQUIRED, 'The controller\'s name.'],
@@ -107,10 +77,8 @@ class ControllerMakeCommand extends SymfonyCommand
 
     /**
      * Get the console command options.
-     *
-     * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['resource', null, InputOption::VALUE_NONE, 'Generate a resource controller class.'],
@@ -122,27 +90,21 @@ class ControllerMakeCommand extends SymfonyCommand
      * Parse the feature name.
      *  remove the Controller.php suffix if found
      *  we're adding it ourselves.
-     *
-     * @param string $name
-     *
-     * @return string
      */
-    protected function parseName($name)
+    protected function parseName(string $name): string
     {
-        return Str::studly(preg_replace('/Controller(\.php)?$/', '', $name).'Controller');
+        return Str::studly(preg_replace('/Controller(\.php)?$/', '', $name) . 'Controller');
     }
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
         if ($this->option('plain')) {
-            return __DIR__.'/../Generators/stubs/controller.plain.stub';
+            return __DIR__ . '/../Generators/stubs/controller.plain.stub';
         }
 
-        return __DIR__.'/../Generators/stubs/controller.stub';
+        return __DIR__ . '/../Generators/stubs/controller.stub';
     }
 }

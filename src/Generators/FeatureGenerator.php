@@ -12,7 +12,6 @@
 
 namespace Vivid\Console\Generators;
 
-use Exception;
 use Vivid\Console\Components\Feature;
 use Vivid\Console\Str;
 
@@ -23,14 +22,9 @@ use Vivid\Console\Str;
 class FeatureGenerator extends Generator
 {
     /**
-     * @param string $feature
-     * @param $device
-     *
-     * @throws Exception
-     *
-     * @return Feature
+     * @throws \Exception
      */
-    public function generate(string $feature, $device)
+    public function generate(string $feature, string $device): Feature
     {
         $feature = Str::feature($feature);
         $device = Str::device($device);
@@ -38,7 +32,7 @@ class FeatureGenerator extends Generator
         $path = $this->findFeaturePath($device, $feature);
 
         if ($this->exists($path)) {
-            throw new Exception('Feature already exists!');
+            throw new \Exception('Feature already exists!');
         }
 
         $namespace = $this->findFeatureNamespace($device);
@@ -69,18 +63,15 @@ class FeatureGenerator extends Generator
     /**
      * Generate the test file.
      *
-     * @param string $feature
-     * @param string $service
-     *
-     * @throws Exception
+     * @throws \Exception
      */
     private function generateTestFile(string $feature, string $service)
     {
         $content = file_get_contents($this->getTestStub());
 
         $namespace = $this->findFeatureTestNamespace($service);
-        $featureNamespace = $this->findFeatureNamespace($service)."\\$feature";
-        $testClass = $feature.'Test';
+        $featureNamespace = $this->findFeatureNamespace($service) . "\\$feature";
+        $testClass = $feature . 'Test';
 
         $content = str_replace(
             ['{{namespace}}', '{{testclass}}', '{{feature}}', '{{feature_namespace}}'],
@@ -95,21 +86,17 @@ class FeatureGenerator extends Generator
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
-        return __DIR__.'/stubs/feature.stub';
+        return __DIR__ . '/stubs/feature.stub';
     }
 
     /**
      * Get the test stub file for the generator.
-     *
-     * @return string
      */
-    private function getTestStub()
+    private function getTestStub(): string
     {
-        return __DIR__.'/stubs/feature-test.stub';
+        return __DIR__ . '/stubs/feature-test.stub';
     }
 }

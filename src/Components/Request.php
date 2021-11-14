@@ -12,31 +12,8 @@
 
 namespace Vivid\Console\Components;
 
-/**
- * @author Bernat Jufré <info@behind.design>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- *
- * @property string $title
- * @property string $service
- * @property string $namespace
- * @property string $file
- * @property string $path
- * @property string $relativePath
- * @property string $content
- */
 class Request extends Component
 {
-    /**
-     * Request constructor.
-     *
-     * @param string $title
-     * @param string $service
-     * @param string $namespace
-     * @param string $file
-     * @param string $path
-     * @param string $relativePath
-     * @param string $content
-     */
     public function __construct(
         string $title,
         string $service,

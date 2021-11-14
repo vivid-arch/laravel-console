@@ -164,7 +164,7 @@ trait Command
      */
     public function ask($question)
     {
-        $question = '<comment>'.$question.'</comment> ';
+        $question = '<comment>' . $question . '</comment> ';
 
         return $this->getHelperSet()->get('dialog')->ask($this->output, $question);
     }
@@ -179,9 +179,9 @@ trait Command
      */
     public function confirmTaskWithUser($task, $question)
     {
-        $question = $question === true ? 'Are you sure you want to run the ['.$task.'] task?' : (string) $question;
+        $question = $question === true ? 'Are you sure you want to run the [' . $task . '] task?' : (string) $question;
 
-        $question = '<comment>'.$question.' [y/N]:</comment> ';
+        $question = '<comment>' . $question . ' [y/N]:</comment> ';
 
         return  $this->getHelperSet()->get('dialog')->askConfirmation($this->output, $question, false);
     }
@@ -195,7 +195,7 @@ trait Command
      */
     public function secret($question)
     {
-        $question = '<comment>'.$question.'</comment> ';
+        $question = '<comment>' . $question . '</comment> ';
 
         return $this->getHelperSet()->get('dialog')->askHiddenResponse($this->output, $question, false);
     }

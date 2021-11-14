@@ -15,22 +15,12 @@ namespace Vivid\Console\Generators;
 use Exception;
 use Vivid\Console\Str;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class ControllerGenerator extends Generator
 {
     /**
-     * @param string $name
-     * @param string $device
-     * @param string $type
-     *
      * @throws Exception
-     *
-     * @return string
      */
-    public function generate(string $name, string $device, string $type = 'plain')
+    public function generate(string $name, string $device, string $type = 'plain'): string
     {
         $name = Str::controller($name);
         $device = Str::device($device);
@@ -39,8 +29,6 @@ class ControllerGenerator extends Generator
 
         if ($this->exists($path)) {
             throw new Exception("Controller $name already exists!");
-
-            return;
         }
 
         $namespace = $this->findControllerNamespace($device);
@@ -59,21 +47,17 @@ class ControllerGenerator extends Generator
 
     /**
      * Get the stub file for the generator.
-     *
-     * @param string $type
-     *
-     * @return string
      */
-    protected function getStub(string $type)
+    protected function getStub(string $type): string
     {
         if ($type === 'resource') {
-            return __DIR__.'/stubs/controller.stub';
+            return __DIR__ . '/stubs/controller.stub';
         }
 
         if ($type === 'invokable') {
-            return __DIR__.'/stubs/controller.invokable.stub';
+            return __DIR__ . '/stubs/controller.invokable.stub';
         }
 
-        return __DIR__.'/stubs/controller.plain.stub';
+        return __DIR__ . '/stubs/controller.plain.stub';
     }
 }

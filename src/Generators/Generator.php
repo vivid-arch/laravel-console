@@ -15,10 +15,6 @@ namespace Vivid\Console\Generators;
 use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class Generator
 {
     use Finder;

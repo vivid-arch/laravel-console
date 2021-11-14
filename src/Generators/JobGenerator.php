@@ -12,33 +12,22 @@
 
 namespace Vivid\Console\Generators;
 
-use Exception;
 use Vivid\Console\Components\Job;
 use Vivid\Console\Str;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class JobGenerator extends Generator
 {
     /**
-     * @param string $job
-     * @param string $domain
-     * @param bool   $isQueueable
-     *
-     * @throws Exception
-     *
-     * @return Job
+     * @throws \Exception
      */
-    public function generate(string $job, string $domain, bool $isQueueable = false)
+    public function generate(string $job, string $domain, bool $isQueueable = false): Job
     {
         $job = Str::job($job);
         $domain = Str::domain($domain);
         $path = $this->findJobPath($domain, $job);
 
         if ($this->exists($path)) {
-            throw new Exception('Job already exists');
+            throw new \Exception('Job already exists');
         }
 
         // Make sure the domain directory exists
@@ -72,22 +61,19 @@ class JobGenerator extends Generator
     /**
      * Generate test file.
      *
-     * @param string $job
-     * @param string $domain
-     *
-     * @throws Exception
+     * @throws \Exception
      */
-    private function generateTestFile($job, $domain)
+    private function generateTestFile(string $jobName, string $domain)
     {
         $content = file_get_contents($this->getTestStub());
 
         $namespace = $this->findDomainJobsTestsNamespace($domain);
-        $jobNamespace = $this->findDomainJobsNamespace($domain)."\\$job";
-        $testClass = $job.'Test';
+        $jobNamespace = $this->findDomainJobsNamespace($domain) . "\\$jobName";
+        $testClass = $jobName . 'Test';
 
         $content = str_replace(
             ['{{namespace}}', '{{testclass}}', '{{job}}', '{{job_namespace}}'],
-            [$namespace, $testClass, Str::snake($job), $jobNamespace],
+            [$namespace, $testClass, Str::snake($jobName), $jobNamespace],
             $content
         );
 
@@ -98,23 +84,17 @@ class JobGenerator extends Generator
 
     /**
      * Create domain directory.
-     *
-     * @param string $domain
      */
-    private function createDomainDirectory($domain)
+    private function createDomainDirectory(string $domain)
     {
-        $this->createDirectory($this->findDomainPath($domain).'/Jobs');
-        $this->createDirectory($this->findDomainTestsPath($domain).'/Jobs');
+        $this->createDirectory($this->findDomainPath($domain) . '/Jobs');
+        $this->createDirectory($this->findDomainTestsPath($domain) . '/Jobs');
     }
 
     /**
      * Get the stub file for the generator.
-     *
-     * @param bool $isQueueable
-     *
-     * @return string
      */
-    public function getStub(bool $isQueueable = false)
+    public function getStub(bool $isQueueable = false): string
     {
         if ($isQueueable) {
             $stubName = '/stubs/queueable-job.stub';
@@ -122,16 +102,14 @@ class JobGenerator extends Generator
             $stubName = '/stubs/job.stub';
         }
 
-        return __DIR__.$stubName;
+        return __DIR__ . $stubName;
     }
 
     /**
      * Get the test stub file for the generator.
-     *
-     * @return string
      */
-    public function getTestStub()
+    public function getTestStub(): string
     {
-        return __DIR__.'/stubs/job-test.stub';
+        return __DIR__ . '/stubs/job-test.stub';
     }
 }

@@ -16,7 +16,7 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class Component implements Arrayable
 {
-    protected $attributes = [];
+    protected array $attributes = [];
 
     /**
      * Get the array representation of this instance.
@@ -30,10 +30,8 @@ class Component implements Arrayable
 
     /**
      * Set the attributes for this component.
-     *
-     * @param array $attributes
      */
-    protected function setAttributes(array $attributes)
+    protected function setAttributes(array $attributes): void
     {
         $this->attributes = $attributes;
     }
@@ -41,11 +39,9 @@ class Component implements Arrayable
     /**
      * Get an attribute's value if found.
      *
-     * @param string $key
-     *
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         if (isset($this->attributes[$key])) {
             return $this->attributes[$key];

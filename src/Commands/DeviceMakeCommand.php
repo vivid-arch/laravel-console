@@ -20,59 +20,26 @@ use Vivid\Console\Filesystem;
 use Vivid\Console\Finder;
 use Vivid\Console\Generators\DeviceGenerator;
 
-/**
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class DeviceMakeCommand extends SymfonyCommand
 {
     use Finder;
     use Command;
     use Filesystem;
 
-    /**
-     * The base namespace for this command.
-     *
-     * @var string
-     */
-    private $namespace;
-
-    /**
-     * The Services path.
-     *
-     * @var string
-     */
-    private $path;
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'make:device';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Create a new Device';
+    private string $namespace;
+    private string $path;
+    protected string $name = 'make:device';
+    protected string $description = 'Create a new Device';
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
-        return __DIR__.'/../Generators/stubs/service.stub';
+        return __DIR__ . '/../Generators/stubs/service.stub';
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
+    public function handle(): void
     {
         try {
             $name = $this->argument('name');
@@ -81,34 +48,34 @@ class DeviceMakeCommand extends SymfonyCommand
             $generator = new DeviceGenerator();
             $device = $generator->generate($name, $noAssets);
 
-            $this->info('Device '.$device->name." created successfully. \n");
+            $this->info('Device ' . $device->name . " created successfully. \n");
 
             $rootNamespace = $this->findRootNamespace();
             $serviceNamespace = $this->findDeviceNamespace($device->name);
 
-            $serviceProvider = $serviceNamespace.'\\Providers\\'.$device->name.'ServiceProvider';
+            $serviceProvider = $serviceNamespace . '\\Providers\\' . $device->name . 'ServiceProvider';
 
             $this->info(
-                'Activate it by registering'.
-                "<comment> $serviceProvider </comment> \n".
+                'Activate it by registering' .
+                "<comment> $serviceProvider </comment> \n" .
                 "in <comment>/config/vivid.php</comment> inside the devices array with the following: \n"
             );
 
             $this->info("<comment>'$serviceProvider' => true,</comment> \n");
             $this->info("Documentation: <comment>https://vivid-arch.github.io/docs/foundation/devices/</comment> \n");
         } catch (\Exception $e) {
-            $this->error($e->getMessage()."\n".$e->getFile().' at '.$e->getLine());
+            $this->error($e->getMessage() . "\n" . $e->getFile() . ' at ' . $e->getLine());
         }
     }
 
-    public function getArguments()
+    public function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The service name.'],
         ];
     }
 
-    public function getOptions()
+    public function getOptions(): array
     {
         return [
             ['no-assets', null, InputOption::VALUE_NONE, 'Specify if a Device has Assets.'],

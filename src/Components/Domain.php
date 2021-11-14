@@ -14,25 +14,8 @@ namespace Vivid\Console\Components;
 
 use Illuminate\Support\Str;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- *
- * @property string $name
- * @property string $namespace
- * @property string $realPath
- * @property string $relativePath
- */
 class Domain extends Component
 {
-    /**
-     * Domain constructor.
-     *
-     * @param string $name
-     * @param string $namespace
-     * @param string $path
-     * @param string $relativePath
-     */
     public function __construct(
         string $name,
         string $namespace,

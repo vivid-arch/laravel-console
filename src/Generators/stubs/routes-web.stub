@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::group(['prefix' => '{{slug}}'], function() {
 
     // The controllers live in {{controllers_path}}

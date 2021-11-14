@@ -33,12 +33,21 @@
             .title {
                 font-size: 96px;
             }
+
+            .links a {
+                font-size: 22px;
+                text-decoration: none;
+                color: black;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
                 <div class="title">Laravel • Vivid</div>
+                <div class="links">
+                    <a href="https://vivid-arch.github.io/" target="_blank">Documentation</a> &bull; <a href="https://github.com/vivid-arch" target="_blank">Github</a> &bull; <a href="https://github.com/vivid-arch/laravel-foundation/issues" target="_blank">Issues</a>
+                </div>
             </div>
         </div>
     </body>

@@ -12,28 +12,10 @@
 
 namespace Vivid\Console\Components;
 
-/**
- * @author Ali Issa <ali@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- *
- * @property string $title
- * @property string $file
- * @property string $realPath
- * @property string $relativePath
- * @property Device|null $service
- * @property string $content
- */
 class Operation extends Component
 {
     /**
-     * Operation constructor.
-     *
-     * @param $title
-     * @param $file
-     * @param $realPath
-     * @param $relativePath
      * @param Device|null $service
-     * @param string      $content
      */
     public function __construct(
         string $title,
@@ -43,7 +25,7 @@ class Operation extends Component
         Device $service = null,
         string $content = ''
     ) {
-        $className = str_replace(' ', '', $title).'Operation';
+        $className = str_replace(' ', '', $title) . 'Operation';
 
         $this->setAttributes([
             'title'        => $title,

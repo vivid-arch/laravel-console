@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 // Prefix: /api/{{slug}}
 Route::group(['prefix' => '{{slug}}'], function() {
 

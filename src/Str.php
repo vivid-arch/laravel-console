@@ -51,7 +51,7 @@ class Str extends LaravelStr
      */
     public static function feature($name)
     {
-        return static::studly(preg_replace('/Feature(\.php)?$/', '', $name).'Feature');
+        return static::studly(preg_replace('/Feature(\.php)?$/', '', $name) . 'Feature');
     }
 
     /**
@@ -67,7 +67,7 @@ class Str extends LaravelStr
      */
     public static function job($name)
     {
-        return static::studly(preg_replace('/Job(\.php)?$/', '', $name).'Job');
+        return static::studly(preg_replace('/Job(\.php)?$/', '', $name) . 'Job');
     }
 
     /**
@@ -83,7 +83,7 @@ class Str extends LaravelStr
      */
     public static function operation($name)
     {
-        return static::studly(preg_replace('/Operation(\.php)?$/', '', $name).'Operation');
+        return static::studly(preg_replace('/Operation(\.php)?$/', '', $name) . 'Operation');
     }
 
     /**
@@ -121,7 +121,7 @@ class Str extends LaravelStr
      */
     public static function controller($name)
     {
-        return static::studly(preg_replace('/Controller(\.php)?$/', '', $name).'Controller');
+        return static::studly(preg_replace('/Controller(\.php)?$/', '', $name) . 'Controller');
     }
 
     /**
@@ -147,7 +147,7 @@ class Str extends LaravelStr
      */
     public static function policy($name)
     {
-        return static::studly(preg_replace('/Policy(\.php)?$/', '', $name).'Policy');
+        return static::studly(preg_replace('/Policy(\.php)?$/', '', $name) . 'Policy');
     }
 
     /**
@@ -159,6 +159,6 @@ class Str extends LaravelStr
      */
     public static function request($name)
     {
-        return static::studly(preg_replace('/Request(\.php)?$/', '', $name).'Request');
+        return static::studly(preg_replace('/Request(\.php)?$/', '', $name) . 'Request');
     }
 }

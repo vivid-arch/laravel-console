@@ -12,30 +12,10 @@
 
 namespace Vivid\Console\Components;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- *
- * @property string $title
- * @property string $namespace
- * @property string $file
- * @property string $path
- * @property string $relativePath
- * @property Domain|null $domain
- * @property string $content
- */
 class Job extends Component
 {
     /**
-     * Job constructor.
-     *
-     * @param string      $title
-     * @param string      $namespace
-     * @param string      $file
-     * @param string      $path
-     * @param string      $relativePath
      * @param Domain|null $domain
-     * @param string      $content
      */
     public function __construct(
         string $title,
@@ -46,7 +26,8 @@ class Job extends Component
         Domain $domain = null,
         string $content = ''
     ) {
-        $className = str_replace(' ', '', $title).'Job';
+        $className = str_replace(' ', '', $title) . 'Job';
+
         $this->setAttributes([
             'title'        => $title,
             'className'    => $className,
@@ -59,10 +40,7 @@ class Job extends Component
         ]);
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $attributes = parent::toArray();
 

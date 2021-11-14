@@ -16,29 +16,15 @@ use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Vivid\Console\Command;
 use Vivid\Console\Finder;
 
-/**
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class DeviceListCommand extends SymfonyCommand
 {
     use Finder;
     use Command;
 
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'list:devices';
+    protected string $name = 'list:devices';
+    protected string $description = 'List the devices in this project.';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'List the devices in this project.';
-
-    public function handle()
+    public function handle(): void
     {
         $devices = $this->listDevices()->all();
 

@@ -16,18 +16,12 @@ use Exception;
 use Vivid\Console\Components\Device;
 use Vivid\Console\Str;
 
-/**
- * @author Abed Halawi <abed.halawi@vinelab.com>
- * @author Meletios Flevarakis <m.flevarakis@gmail.com>
- */
 class DeviceGenerator extends Generator
 {
     /**
-     * The directories to be created under the devices directory.
-     *
-     * @var array
+     * The directories to be created under the devices' directory.
      */
-    protected $directories = [
+    protected array $directories = [
         'Console/',
         'database/',
         'database/factories/',
@@ -44,7 +38,7 @@ class DeviceGenerator extends Generator
         'Tests/Features/',
     ];
 
-    protected $resourceDirectories = [
+    protected array $resourceDirectories = [
         'js/',
         'lang/',
         'sass/',
@@ -52,14 +46,11 @@ class DeviceGenerator extends Generator
     ];
 
     /**
-     * @param $name
-     * @param bool $noAssets
+     * Generate a new device.
      *
-     *@throws Exception
-     *
-     * @return bool|Device
+     * @throws Exception
      */
-    public function generate($name, $noAssets)
+    public function generate(string $name, bool $noAssets): Device
     {
         $name = Str::device($name);
         $slug = Str::snake($name);
@@ -67,13 +58,9 @@ class DeviceGenerator extends Generator
 
         if ($this->exists($path)) {
             throw new Exception('Device already exists!');
-
-            return false;
         }
 
         $this->createDirectory($path);
-
-        $this->createFile($path.'/.gitkeep');
 
         $this->createDeviceDirectories($path);
 
@@ -96,33 +83,22 @@ class DeviceGenerator extends Generator
 
     /**
      * Create the default directories at the given device path.
-     *
-     * @param string $path
-     *
-     * @return void
      */
-    public function createDeviceDirectories($path)
+    public function createDeviceDirectories(string $path): void
     {
         foreach ($this->directories as $directory) {
-            $this->createDirectory($path.'/'.$directory);
-            $this->createFile($path.'/'.$directory.'/.gitkeep');
+            $this->createDirectory($path . '/' . $directory);
         }
     }
 
     /**
      * Add the corresponding device provider for the created device.
      *
-     * @param string $name
-     * @param string $slug
-     * @param string $path
-     *
      * @throws Exception
-     *
-     * @return void
      */
-    public function addDeviceProviders(string $name, string $slug, string $path)
+    public function addDeviceProviders(string $name, string $slug, string $path): void
     {
-        $namespace = $this->findDeviceNamespace($name).'\\Providers';
+        $namespace = $this->findDeviceNamespace($name) . '\\Providers';
 
         $this->createRegistrationServiceProvider($name, $path, $slug, $namespace);
 
@@ -131,114 +107,95 @@ class DeviceGenerator extends Generator
 
     /**
      * Create the service provider that registers this device.
-     *
-     * @param string $name
-     * @param string $path
      */
-    public function createRegistrationServiceProvider($name, $path, $slug, $namespace)
+    public function createRegistrationServiceProvider(string $name, string $path, $slug, $namespace): void
     {
-        $content = file_get_contents(__DIR__.'/stubs/serviceprovider.stub');
+        $content = file_get_contents(__DIR__ . '/stubs/serviceprovider.stub');
         $content = str_replace(
             ['{{name}}', '{{slug}}', '{{namespace}}'],
             [$name, $slug, $namespace],
             $content
         );
 
-        $this->createFile($path.'/Providers/'.$name.'ServiceProvider.php', $content);
+        $this->createFile($path . '/Providers/' . $name . 'ServiceProvider.php', $content);
     }
 
     /**
      * Create the routes service provider file.
      *
-     * @param string $name
-     * @param string $path
-     * @param string $slug
-     * @param string $namespace
-     *
      * @throws Exception
      */
-    public function createRouteServiceProvider(string $name, string $path, string $slug, string $namespace)
+    public function createRouteServiceProvider(string $name, string $path, string $slug, string $namespace): void
     {
         $deviceNamespace = $this->findDeviceNamespace($name);
-        $controllers = $deviceNamespace.'\Http\Controllers';
+        $controllers = $deviceNamespace . '\Http\Controllers';
         $foundation = $this->findFoundationNamespace();
 
-        $content = file_get_contents(__DIR__.'/stubs/routeserviceprovider.stub');
+        $content = file_get_contents(__DIR__ . '/stubs/routeserviceprovider.stub');
         $content = str_replace(
             ['{{name}}', '{{namespace}}', '{{controllers_namespace}}', '{{foundation_namespace}}'],
             [$name, $namespace, $controllers, $foundation],
             $content
         );
 
-        $this->createFile($path.'/Providers/RouteServiceProvider.php', $content);
+        $this->createFile($path . '/Providers/RouteServiceProvider.php', $content);
     }
 
     /**
      * Add the routes files.
-     *
-     * @param string $name
-     * @param string $slug
-     * @param string $path
      */
-    public function addRoutesFiles($name, $slug, $path)
+    public function addRoutesFiles(string $name, string $slug, string $path): void
     {
-        $controllers = 'app/Devices/'.$name.'/Http/Controllers';
+        $controllers = 'app/Devices/' . $name . '/Http/Controllers';
 
-        $contentApi = file_get_contents(__DIR__.'/stubs/routes-api.stub');
+        $contentApi = file_get_contents(__DIR__ . '/stubs/routes-api.stub');
         $contentApi = str_replace(['{{slug}}', '{{controllers_path}}'], [$slug, $controllers], $contentApi);
 
-        $contentWeb = file_get_contents(__DIR__.'/stubs/routes-web.stub');
+        $contentWeb = file_get_contents(__DIR__ . '/stubs/routes-web.stub');
         $contentWeb = str_replace(['{{slug}}', '{{controllers_path}}'], [$slug, $controllers], $contentWeb);
 
-        $this->createFile($path.'/routes/api.php', $contentApi);
-        $this->createFile($path.'/routes/web.php', $contentWeb);
+        $this->createFile($path . '/routes/api.php', $contentApi);
+        $this->createFile($path . '/routes/web.php', $contentWeb);
 
         unset($contentApi, $contentWeb);
     }
 
     /**
      * Add the welcome view file.
-     *
-     * @param string $name
      */
-    public function addWelcomeViewFile($name)
+    public function addWelcomeViewFile(string $name): void
     {
-        $path = resource_path('devices/'.$name);
+        $path = resource_path('devices/' . $name);
 
         $this->createFile(
-            $path.'/views/welcome.blade.php',
-            file_get_contents(__DIR__.'/stubs/welcome.blade.stub')
+            $path . '/views/welcome.blade.php',
+            file_get_contents(__DIR__ . '/stubs/welcome.blade.stub')
         );
     }
 
-    public function createResourceDirectories($name)
+    public function createResourceDirectories(string $name): void
     {
-        $path = resource_path('devices/'.lcfirst($name));
+        $path = resource_path('devices/' . lcfirst($name));
         foreach ($this->resourceDirectories as $directory) {
-            $this->createDirectory($path.'/'.$directory);
-            $this->createFile($path.'/'.$directory.'/.gitkeep');
+            $this->createDirectory($path . '/' . $directory);
         }
     }
 
     /**
      * Get the stub file for the generator.
-     *
-     * @return string
      */
-    protected function getStub()
+    protected function getStub(): string
     {
-        return __DIR__.'/stubs/service.stub';
+        return __DIR__ . '/stubs/service.stub';
     }
 
     /**
      * Add the ModelFactory file.
-     *
-     * @param string $path
      */
-    public function addModelFactory($path)
+    public function addModelFactory(string $path): void
     {
-        $modelFactory = file_get_contents(__DIR__.'/stubs/model-factory.stub');
-        $this->createFile($path.'/database/factories/ModelFactory.php', $modelFactory);
+        $modelFactory = file_get_contents(__DIR__ . '/stubs/model-factory.stub');
+        $this->createFile($path . '/database/factories/ModelFactory.php', $modelFactory);
 
         unset($modelFactory);
     }
