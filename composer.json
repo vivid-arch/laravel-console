@@ -18,7 +18,7 @@
     "bin": ["vivid"],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.2.0"
+        "php": ">=7.4.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
