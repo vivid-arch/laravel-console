@@ -453,7 +453,7 @@ trait Finder
      */
     public function findJobPath($domain, $job)
     {
-        return $this->findDomainPath($domain) . DS . 'Jobs' . DS . $job . '.php';
+        return $this->findDomainPath($domain) . '/' . 'Jobs' . '/' . $job . '.php';
     }
 
     /**
@@ -508,10 +508,10 @@ trait Finder
     public function findDomainTestsPath($domain)
     {
         if ($this->isMicroservice()) {
-            return base_path() . DS . 'tests' . DS . 'Domains' . DS . $domain;
+            return base_path() . '/' . 'tests' . '/' . 'Domains' . '/' . $domain;
         }
 
-        return $this->findDomainPath($domain) . DS . 'Tests';
+        return $this->findDomainPath($domain) . '/' . 'Tests';
     }
 
     /**
@@ -524,7 +524,7 @@ trait Finder
      */
     public function findJobTestPath($domain, $jobTest)
     {
-        return $this->findDomainTestsPath($domain) . DS . 'Jobs' . DS . $jobTest . '.php';
+        return $this->findDomainTestsPath($domain) . '/' . 'Jobs' . '/' . $jobTest . '.php';
     }
 
     /**
@@ -646,7 +646,7 @@ trait Finder
         $files = $finder->name($fileName)->in($this->findDevicesRootPath())->files();
         foreach ($files as $file) {
             $path = $file->getRealPath();
-            $serviceName = strstr($file->getRelativePath(), DS, true);
+            $serviceName = strstr($file->getRelativePath(), '/', true);
             $device = $this->findDevice($serviceName);
             $content = file_get_contents($path);
 
